@@ -50,7 +50,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2022-11-06 09:57:27'
+  postUpdate: '2022-11-06 09:59:34'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -144,9 +144,11 @@
 
 （仍在施工中ing）
 电容工艺非极性电容大都是MLCC（多层陶瓷电容），注意封装不单影响大小，还影响耐压。0402耐压值较低（队里一本电容本0402 1uF 耐压只有10V，而6.8nF耐压有50V，另一本的10nF也有50V耐压），建议只用在5V及以下电源电路中 。1210 耐压高点
-电解电容&lt;span class=”hint—top hint—error hint—medium hint—rounded hint—bounce” aria-label=”警告：这玩意随时有可能爆炸“&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;/sup&gt;钽电容： 黄色封装，注意封装上的标记是正极！充放电快，ESR小。铝电容： 块头较大，充放电慢，ESR大，但容值会大。
+电解电容电解电容具有极性，但为什么有极性我尚不明白[1]。钽电容： 黄色封装，注意封装上的标记是正极！充放电快，ESR小。铝电容： 块头较大，充放电慢，ESR大，但容值会大。
 电容功能耦合电容（隔直电容）去除直流成分，消除耦合的直流偏置特别是多级放大电路中，直流偏置会越放越大，耦合电容不可缺少因此要容值偏大，降低对需要的交流信号的衰减作用
-旁路电容并联在传输线上，高频的噪声通过旁路电容流掉，达到滤噪声的目的。一般使用一个大电容并联一个小电 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/11/03/Ubuntu%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AERime%E8%BE%93%E5%85%A5%E6%B3%95/" title="Ubuntu系统安装配置Rime输入法">Ubuntu系统安装配置Rime输入法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-11-03T07:29:06.000Z" title="Created 2022-11-03 15:29:06">2022-11-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Liunx/">Liunx</a></span></div><div class="content">系统环境: Ubuntu 22.04
+旁路电容并联在传输线上，高频的噪声通过旁路电容流掉，达到滤噪声的目的。一般使用一个大电容并联一个小电容
+但是大电容和小电容并联等效容值相加，那么为什么不用一个更大容值的电容代替呢？
+原来是由于制造工艺的原因，大容值的电容往往带有较大的感抗，高频特性反而不好，常常采用一大电容，一小电容并联的形式去去掉高频噪声[2]RLC串联回路工作在 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/11/03/Ubuntu%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AERime%E8%BE%93%E5%85%A5%E6%B3%95/" title="Ubuntu系统安装配置Rime输入法">Ubuntu系统安装配置Rime输入法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-11-03T07:29:06.000Z" title="Created 2022-11-03 15:29:06">2022-11-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Liunx/">Liunx</a></span></div><div class="content">系统环境: Ubuntu 22.04
 大三啦终于开始在本机上装Liunx系统啦，望着崭新的系统，再次感受到三年前买新电脑的欣喜和激动🥰
 新系统首先要解决不能输入中文的问题。那都用上Linux了，再用搜狗输入法是不是太low了，有没有一款自由度极高的开源输入法呢，Rime输入法进入了我的眼帘。于是开始了一上午的安装配置Rime之旅[1]。
 安装RimeRime输入法在不同平台拥有不同的名称，在Liunx中叫做中州韻。Rime有基于ibus和fcitx的版本，我选择的是ibus。
