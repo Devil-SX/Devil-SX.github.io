@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>百丽宫一只懒猫的小窝</title>
+  
+  
+  <link href="https://devil-sx.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://devil-sx.github.io/"/>
+  <updated>2023-02-06T08:02:53.823Z</updated>
+  <id>https://devil-sx.github.io/</id>
+  
+  <author>
+    <name>杜书丞</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>FDM有限差分法</title>
+    <link href="https://devil-sx.github.io/2023/02/%E6%95%B0%E5%AD%A6%E6%96%B9%E6%B3%95/FDM%E6%9C%89%E9%99%90%E5%B7%AE%E5%88%86%E6%B3%95/"/>
+    <id>https://devil-sx.github.io/2023/02/%E6%95%B0%E5%AD%A6%E6%96%B9%E6%B3%95/FDM%E6%9C%89%E9%99%90%E5%B7%AE%E5%88%86%E6%B3%95/</id>
+    <published>2023-02-04T02:31:49.000Z</published>
+    <updated>2023-02-06T08:02:53.823Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><pre><code>📢该推文部分内容是作者个人猜测，谨慎阅读。欢迎在评论区纠正！⛏ 作者正在摸鱼，该推文尚未完成</code></pre><p>微分方程往往是连续的，可计算机更偏好以离散的视角观察世界。如何用计算机求解微分方程？FDM给出了一种近似计算方法。</p><h1 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h1><script type="math/tex; mode=display">\begin{align}Taylor's\,Polynomial\quad f(x_0+h)&=f(x_0)+\frac{f'(x_0)}{1!}h+\frac{f'(x_0)}{2!}h^2...+\frac{f'(x_0)}{n!}h^n+R_n(x)\\\Rightarrow f'(x_0)&=\frac{f(x_0+h)-f(x_0)}h-\frac{R_1(x_0+h)}h\\f'(x_0)&\approx\frac{f(x_0+h)-f(x_0)}h\end{align}</script><p>✋Q：为什么要近似？知道解析式不能直接求出导数吗？</p><p>🧐A（个人猜测）：MATLAB的符号函数可以实现求部分导函数解析式的功能了（并不知道怎么实现的）。相比DFM是数值的，可以求解没有导函数，以及函数只有数据点的情况，更加普适。在运算量上，说不定也有优势。</p><h2 id="误差分析"><a href="#误差分析" class="headerlink" title="误差分析"></a>误差分析</h2><p>Error</p><ul><li>round-off error</li><li>truncation error</li></ul><p>truncation error</p><script type="math/tex; mode=display">\begin{align}y&\equiv \lim_{h\rightarrow0}\frac{f(x+h)-f(x)}{h}\\y^\ast&\equiv \frac{f(x+h)-f(x)}h\\|\Delta y|&=|y^\ast-y|=|\frac{R_1(x+h)}h|\\Lagrange\;Form\quad R_n(x+h)&=\frac{f^{(n+1)}(\xi)}{(n+1)!}h^{n+1}\\\Rightarrow|\Delta y|&=|f''(\xi)h|\\\end{align}</script><p>$h&gt;0,x&lt;\xi&lt;x+h;h&lt;0,x+h&lt;\xi&lt;x$</p><p>$x\rightarrow y$ 唯一，而 $x\rightarrow y^\ast$ 和 $h$ 的取值相关。FDM求解的是 $y^\ast$ ，选择的映射方式不同，解的值 $y^\ast$ 也不同。</p><p>对比求导表达式，当 $h\rightarrow 0$ 时，收敛到理想值。步长 $h$ 绝对值越小，精度越大，运算量越大。</p><p>不同的映射方式分为forward difference, backward difference和central difference。他们的误差都是 $f’’(\xi)h$ 。</p><script type="math/tex; mode=display">\begin{align}Define\;&h>0\\Forward\;Difference\quad\bigtriangleup_h [f](x)&\equiv f(x+h)-f(x)\\Backword\;Difference\quad\bigtriangledown_h [f](x)&\equiv f(x)-f(x-h)\\Central\;Difference\quad\delta_h [f](x)&\equiv f(x+h/2)-f(x-h/2)\\&=\bigtriangleup_{h/2} [f](x)+\bigtriangledown_{h/2} [f](x)\\y^\ast&=\frac{Difference|h}{h}\end{align}</script><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><h2 id="求解1-D数理方程"><a href="#求解1-D数理方程" class="headerlink" title="求解1-D数理方程"></a>求解1-D数理方程</h2><p>Explicit Method</p><p>Implicit Method</p><p>Crank-Nicolson Method</p><h2 id="MATLAB仿真"><a href="#MATLAB仿真" class="headerlink" title="MATLAB仿真"></a>MATLAB仿真</h2><script type="math/tex; mode=display">\begin{align}&U_t=\alpha U_{xx},\quad\alpha=\frac1{\pi^2}\\&U(0,t)=U(1,t)=0\\&U(x,0)=\frac{1}{\pi^2}\sin(\pi x)\end{align}</script><p>Explicit Method<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Alpha = <span class="number">1</span>/<span class="built_in">pi</span>^<span class="number">2</span>;</span><br><span class="line">k = <span class="number">0.1</span>; <span class="comment">% step of time</span></span><br><span class="line">h = <span class="number">0.1</span>; <span class="comment">% step of space</span></span><br><span class="line">r = k/h^<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">t = <span class="number">0</span>:k:<span class="number">2</span>;</span><br><span class="line">x = <span class="number">0</span>:h:<span class="number">1</span>;</span><br><span class="line">u = <span class="built_in">zeros</span>(<span class="built_in">length</span>(t),<span class="built_in">length</span>(x));</span><br><span class="line"><span class="comment">% 初始值设置</span></span><br><span class="line">u(<span class="number">1</span>,<span class="number">1</span>:<span class="built_in">length</span>(x)) = Alpha * <span class="built_in">sin</span>(<span class="built_in">pi</span>*x);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n = <span class="number">1</span>:<span class="built_in">length</span>(t)<span class="number">-1</span> <span class="comment">% loop of time</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>+<span class="number">1</span>:<span class="built_in">length</span>(x)<span class="number">-1</span> <span class="comment">% loop of space</span></span><br><span class="line">        u(n+<span class="number">1</span>,<span class="built_in">j</span>)=(<span class="number">1</span><span class="number">-2</span>*Alpha*r)*u(n,<span class="built_in">j</span>)+Alpha*r*u(n,<span class="built_in">j</span><span class="number">-1</span>)+Alpha*r*u(n,<span class="built_in">j</span>+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">mesh(x,t,u);</span><br><span class="line">xlabel(<span class="string">&#x27;x&#x27;</span>,<span class="string">&#x27;FontSize&#x27;</span>,<span class="number">20</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;t&#x27;</span>,<span class="string">&#x27;FontSize&#x27;</span>,<span class="number">20</span>);</span><br></pre></td></tr></table></figure></p><p>在编写程序时，状态随着$t$传播的感受十分直观。这与数学上解方程的感觉是不同的，也更加符合公式所描绘的物理图景。</p><p><img src="figure.png" alt="结果"></p><p>本题的理论解</p><script type="math/tex; mode=display">U(x,t)=\frac1{\pi^2}e^{-t}\sin(\pi x)</script><p>TODO List:</p><ul><li>Numberical Stability</li></ul><p>参考</p><p><i class="fa-brands fa-wikipedia-w fa-lg"></i><a href="https://en.wikipedia.org/wiki/Finite_difference_method">Finite difference method - Wikipedia</a></p><p><i class="fa-brands fa-wikipedia-w fa-lg"></i><a href="https://en.wikipedia.org/wiki/Finite_difference">Finite difference - Wikipedia</a></p>]]></content>
+    
+    
+    <summary type="html">下次再也不写这么长的推文了！</summary>
+    
+    
+    
+    <category term="数学方法" scheme="https://devil-sx.github.io/categories/%E6%95%B0%E5%AD%A6%E6%96%B9%E6%B3%95/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>关于小窝</title>
+    <link href="https://devil-sx.github.io/2023/02/%E5%85%B6%E5%AE%83/%E5%85%B3%E4%BA%8E%E5%B0%8F%E7%AA%9D/"/>
+    <id>https://devil-sx.github.io/2023/02/%E5%85%B6%E5%AE%83/%E5%85%B3%E4%BA%8E%E5%B0%8F%E7%AA%9D/</id>
+    <published>2023-02-02T08:10:17.000Z</published>
+    <updated>2023-02-06T10:41:57.874Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!--自我介绍本站定位记些什么时间历程--><p>Hello！ 这里是本懒猫的小窝。科技、美食、动漫、电影、绘画……一只啥都感兴趣的懒猫，一只期待有朝一日成为酷酷的ICer的懒猫！欢迎同好交友来交流:-)</p><pre><code>联系方式在主页侧边栏，狠狠地戳我！</code></pre><h1 id="小窝都有啥"><a href="#小窝都有啥" class="headerlink" title="小窝都有啥"></a>小窝都有啥</h1><p>游戏心得、知识分享、<del>懒得搭站点一些乱七八糟的东西也放在这</del>……尽可能在货架上摆上最有意思最有深度的文章！</p><p>尽可能少放软件教程在这上面，因为大部分内容在官方文档、Stack某flow都能找到非常高质量的解答，花很多时间也不见得能写得有它们漂亮有深度。</p><p>个人倒是有经常记录笔记的习惯，也积累了相当一部分的笔记。不过用了很多Obsidian特殊的功能，迁移要相当一部分精力，并且内容全是只有自己才能看懂的火星文，翻译成地球人的语言也要不少的功夫。也许某天心血来潮也会找个站点挂载了？<del>不过翻译是不可能滴</del></p><h1 id="小窝历程"><a href="#小窝历程" class="headerlink" title="小窝历程"></a>小窝历程</h1><p>看看小窝是怎么一砖一瓦搭起来的吧~</p><div class="timeline undefined"><div class='timeline-item headline'><div class='timeline-item-title'><div class='item-circle'><p>2022</p></div></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>10-5</p></div></div><div class='timeline-item-content'><p>采用Hexo+Butterfly+GithubPages，站点初步搭建完成</p></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>不记得啥时候了</p></div></div><div class='timeline-item-content'><p>提交至百度、Bing站点平台<br>(由于GithubPages屏蔽了百度的爬虫，只有Bing能搜到)</p></div></div></div><div class="timeline undefined"><div class='timeline-item headline'><div class='timeline-item-title'><div class='item-circle'><p>2023</p></div></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p> 2-6</p></div></div><div class='timeline-item-content'><p>统一博客颜色风格<br>配置RSS</p></div></div></div>]]></content>
+    
+    
+    <summary type="html">欢迎参观俺的小窝:-)</summary>
+    
+    
+    
+    <category term="其它" scheme="https://devil-sx.github.io/categories/%E5%85%B6%E5%AE%83/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>volatile和变量模型</title>
+    <link href="https://devil-sx.github.io/2023/01/C++/volatile%E5%92%8C%E5%8F%98%E9%87%8F%E6%A8%A1%E5%9E%8B/"/>
+    <id>https://devil-sx.github.io/2023/01/C++/volatile%E5%92%8C%E5%8F%98%E9%87%8F%E6%A8%A1%E5%9E%8B/</id>
+    <published>2023-01-05T16:39:01.000Z</published>
+    <updated>2023-01-26T07:13:01.505Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>学习<a href="https://github.com/liangkangnan/tinyriscv">tinyrisc-v项目</a>运行程序时出现Time Out的输出。对比测试锁定在了volatile关键字上。发现像示例一样声明变量时加上volatile就解决了。之前也接触过volatile的相关资料，当时似懂非懂，借这次机会捣鼓一下。</p><p>以例程里的计时器中断文件举例：<code>/tests/example/timer_int/main.c</code></p><p><img src="main.png" alt="main.c"><br><em>注：在同目录的<code>Makefile</code>文件下可以看到<img src="CFLAG.png" alt="">这个参数，预定义了<code>SIMULATION</code>，只会编译<code>#ifdef SIMULATION</code>中的代码</em></p><h3 id="Volatile-优化了什么？"><a href="#Volatile-优化了什么？" class="headerlink" title="Volatile 优化了什么？"></a>Volatile 优化了什么？</h3><p>我们仅仅修改<code>count</code>变量声明，一次保留<code>volatile</code>，一次去掉，分别编译，对比生成的反汇编文件<code>timer_int.dump</code></p><p><img src="diff.png" alt="左侧是去掉volatile，右侧是保留volatile">  </p><p>程序出现了超时问题(Time Out)，因此我们重点关注循环的条件判断观察是否导致离死循环——也就是源文件<code>main.c</code>的 <code>if(count == 2)</code> 语句</p><p>条件判断在汇编里对应的是条件分支指令，也就是反编译中出现的 <strong>bne</strong>。</p><pre><code>bne（branch not equal）作用是对比两个寄存器的值，如果不等即跳转到指定的程序位置。</code></pre><p>两次bne的区别是跳转的位置不同，去掉关键字后是跳转到<code>9c</code>——本行，而保留是跳转到<code>98</code>——上一行。我们来看看这<code>98</code>标签的程序。</p><p><code>98</code>是：<strong>lw a3,0(a5)</strong></p><pre><code>lw(Load Word)，从内存中取数据到寄存器之中</code></pre><p>从a5（基地址,Base）+0（偏移量,offset）的地址对应的内存中，取出字放在a3寄存器内。a5是0x10000&lt;&lt;12（左移12位来自<code>lui</code>，Load Upper Immediate），是编译器为变量分配的基地址，而0(a5)则存放着count变量</p><p>也就是说，每次进行循环判断时，保留volatile会重新从内存中取出count的值放入寄存器中进行比较，而去掉后则不会更新寄存器进行比较，所以导致寄存器中的值始终不变，进入死循环</p><h3 id="为什么会优化？"><a href="#为什么会优化？" class="headerlink" title="为什么会优化？"></a>为什么会优化？</h3><p>处理器能对寄存器之中的值进行运算处理，所以储存在寄存器中的变量运算最快。</p><div class="mermaid-wrap"><pre class="mermaid-src" hidden>  flowchart LRa[处理器]&lt;--&gt; b[寄存器]  </pre></div><p>但为了控制数据传输的开支，寄存器的数量是有限的，若变量数量超出寄存器数量，编译器就会将一部分变量储存在内存之中。</p><p>处理器不能直接对内存中的值进行操作，因此如果要对内存中的值进行处理，要先把内存的值放在寄存器之中。</p><div class="mermaid-wrap"><pre class="mermaid-src" hidden>  flowchart LRa[处理器]&lt;--&gt; b[寄存器]&lt;--&gt;c[内存]  </pre></div><p>而若两次指令的过程中，编译器判断某个变量的值没有发生变化，便会省去从内存中取值的操作，使用上一次的值进行计算。</p><p>那么volatile的作用是什么呢？</p><p><a href="https://web.archive.org/web/20181230041359if_/http://www.open-std.org/jtc1/sc22/wg14/www/abq/c17_updated_proposed_fdis.pdf">C17</a>标准中对于voliate的说明：</p><p><img src="C17.png" alt=""></p><p>volatile类型的变量可能受某些执行或副作用修改，使用volatile将严格使用abstract machine（定义也在C17中）的规则评估（操作它的行为）。</p><p>count变量的更新是在中断之中执行的，在编译阶段中无法“察觉”到这个更新，于是编译器认为count变量没有发生变化，进行了优化。使用volatile关键字则可以强制每次使用count从内存中取值。</p><h3 id="还有一些搞不懂的地方"><a href="#还有一些搞不懂的地方" class="headerlink" title="还有一些搞不懂的地方"></a>还有一些搞不懂的地方</h3><p>反汇编指令中出现了mv a5,a5，这个指令有什么作用？能去掉吗？</p>]]></content>
+    
+    
+    <summary type="html">想要让处理器对变量的值进行操作，还需要经过一道门槛</summary>
+    
+    
+    
+    <category term="C++" scheme="https://devil-sx.github.io/categories/C/"/>
+    
+    
+    <category term="计算机结构" scheme="https://devil-sx.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常见信号频谱记忆小妙招</title>
+    <link href="https://devil-sx.github.io/2022/12/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E5%B8%B8%E8%A7%81%E4%BF%A1%E5%8F%B7%E9%A2%91%E8%B0%B1%E8%AE%B0%E5%BF%86%E5%B0%8F%E5%A6%99%E6%8B%9B/"/>
+    <id>https://devil-sx.github.io/2022/12/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E5%B8%B8%E8%A7%81%E4%BF%A1%E5%8F%B7%E9%A2%91%E8%B0%B1%E8%AE%B0%E5%BF%86%E5%B0%8F%E5%A6%99%E6%8B%9B/</id>
+    <published>2022-12-24T05:24:51.000Z</published>
+    <updated>2023-02-06T02:29:12.083Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="余弦信号"><a href="#余弦信号" class="headerlink" title="余弦信号"></a>余弦信号</h1><script type="math/tex; mode=display">cos(\Omega_0t)\leftrightarrow \frac{1}{2}[\delta(\Omega-\Omega_0)+\delta(\Omega+\Omega_0)]</script><script type="math/tex; mode=display">sin(\Omega_0t)\leftrightarrow \frac{1}{2j}[\delta(\Omega-\Omega_0)-\delta(\Omega+\Omega_0)]</script><p>余弦信号是傅里叶变换的基（余弦信号和复指数信号$e^{j\Omega t}$性质相同，或者说复指数信号是余弦信号在复频域的推广），它的频谱非常纯粹，只有正负频率上的两个冲激。</p><p>将这两个冲激函数画在复平面上。<br><img src="cos.png" alt="cos频谱（两个冲激重叠了）"></p><p>当信号时延，正负频率脉冲向相反方向旋转相同相位角，$sin(\Omega_0t)$的频谱可以用$cos(\Omega_0t+\pi/2)$记忆。<br><img src="sin.png" alt="sin频谱"></p><p>任意相位的余弦信号$cos(\Omega_0t+\phi)$频谱也可以画出。<br><img src="cos_normal.png" alt="任意相位"><br><strong>注意</strong></p><ol><li>辅助圆的半径是冲激信号的大小1/2。</li><li>该作图法只显示了冲激的大小和相位信息，没有频率。</li><li>也可以用实信号频域共轭偶对称来记忆两个脉冲的关系。</li></ol><h1 id="门函数-矩形窗函数"><a href="#门函数-矩形窗函数" class="headerlink" title="门函数/矩形窗函数"></a>门函数/矩形窗函数</h1><p>三个参数确定一个门函数，长度$T$，幅度$A$，中心位置$T_0$</p><p>知道中心位置在原点的门函数频谱，其它门函数频谱乘一个时延因子$e^{-j\Omega T_0}$即可。</p><p>还是需要记忆频谱是$Sa$函数。</p><p>中心在原点的门函数是（共轭）偶对称函数，所以其频谱是实的。</p><p>$\Omega \rightarrow 0,Sa \rightarrow 1$，频率为0的分量是时域的直流分量——图形下的面积$AT$。确定频谱的形式是$ATSa$。</p><p>根据对偶性，频谱是频率为$-T/2\sim T/2$的余弦信号平权线性叠加，最高的频率是$T/2$，$Sa$内以$T/2$作为频率。更好的记忆方法还没有想到。</p><script type="math/tex; mode=display">ATSa(\frac{T}2 \Omega )e^{-jT_0\Omega}</script>]]></content>
+    
+    
+    <summary type="html">数学能够用图像表达就简单了一半</summary>
+    
+    
+    
+    <category term="信号处理" scheme="https://devil-sx.github.io/categories/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/"/>
+    
+    
+    <category term="傅里叶变换" scheme="https://devil-sx.github.io/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>傅里叶变换之美</title>
+    <link href="https://devil-sx.github.io/2022/12/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E4%B9%8B%E7%BE%8E/"/>
+    <id>https://devil-sx.github.io/2022/12/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E4%B9%8B%E7%BE%8E/</id>
+    <published>2022-12-20T13:06:35.000Z</published>
+    <updated>2023-02-06T02:09:27.006Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>对称之美，简洁之美。在我心中傅里叶变换的美不亚于欧拉公式和麦克斯韦方程组。</p></blockquote><script type="math/tex; mode=display">\begin{align}&FT&X(j\Omega)&=\int_{-\infty}^{+\infty} x(t)e^{-j\Omega t} dt \\&&x(t)&=\frac{1}{2\pi}\int_{-\infty}^{+\infty} X(j\Omega)e^{j\Omega t} d\Omega \\&DTFT&X(e^{j\omega})&=\sum_{n=-\infty}^{+\infty}x(n)e^{-j\omega n} \\&&x(n)&=\frac{1}{2\pi}\int_{<2\pi>} X(e^{j\omega})e^{j\omega t} d\omega \\&DFT&X(k)&=\sum_{<N>}x(n)W_N^{kn}\\&&x(n)&=\frac1N\sum_{<N>}X(k)W_N^{-kn}\end{align}</script><p>傅里叶变换高度的对称性之美震撼人心。时域和频域，就像一对孪生，所有的性质都一一对应。然而只有时域具有更加直观的现实意义，我们也生活在时间的流中，傅里叶变换向我们打开了另一个镜像世界的大门。</p><p>从形式上，便可见傅里叶变换的对称性。</p><p>我更喜欢用频率$f$去表示FT，将角频率换成频率后，FT的形式更加对称，推导的性质（共轭、对偶etc）也具备对称性，便于记忆。而且量纲上$t$和$f$互为倒数，也更具美感。</p><script type="math/tex; mode=display">\begin{align}X(j2\pi f)&=\int_{-\infty}^{+\infty} x(t)e^{-j2\pi f t} dt \\x(t)&=\int_{-\infty}^{+\infty} X(j2\pi f)e^{j2\pi f t} df \end{align}</script><p>DTFT也可以表示成对称形式。用$m$表示$n$的“倒量”。</p><script type="math/tex; mode=display">\begin{align}X(e^{j2\pi m})&=\sum_{n=-\infty}^{+\infty}x(n)e^{-j2\pi m n} \\x(n)&=\int_{<2>} X(e^{j2\pi m})e^{j2\pi m t} dm \\\end{align}</script><p>大道至简，傅里叶变换的简洁美沁人心脾。她告诉我们，无论多么复杂离奇的函数都可以分解为许多简单优美的正弦函数的线性叠加。量子学说带来的波动观点，不确定性等等，也告诉我们世界其实简洁如弦，傅里叶变换将美从数学领域带到了物理领域。</p>]]></content>
+    
+    
+    <summary type="html">对称之美，简洁之美。</summary>
+    
+    
+    
+    <category term="信号处理" scheme="https://devil-sx.github.io/categories/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/"/>
+    
+    
+    <category term="傅里叶变换" scheme="https://devil-sx.github.io/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>问题悬赏</title>
+    <link href="https://devil-sx.github.io/2022/12/%E5%85%B6%E5%AE%83/%E9%97%AE%E9%A2%98%E6%82%AC%E8%B5%8F/"/>
+    <id>https://devil-sx.github.io/2022/12/%E5%85%B6%E5%AE%83/%E9%97%AE%E9%A2%98%E6%82%AC%E8%B5%8F/</id>
+    <published>2022-12-17T15:04:33.000Z</published>
+    <updated>2023-02-04T07:27:41.917Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>在《巫师3》中，据点都有告示板张贴着各种悬赏任务，玩家可以接下猎魔悬赏完成并获得报酬。</p><p>这一篇blog也是类似的“悬赏告示板”，不过并不是猎魔悬赏，而是一些我想不明白的问题🤔。给出解答的人获得问题悬赏（虽然金额不多），奖金全部来自个人腰包。</p><p>如果您有独到的见解，欢迎在这篇博客评论区下留言，或者单独联系我🥰<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="联系方式在侧边个人介绍">[1]</span></a></sup>。</p></blockquote><h1 id="杂散的来源？"><a href="#杂散的来源？" class="headerlink" title="杂散的来源？"></a>杂散的来源？</h1><p>2022.12.17</p><p>对于LTI系统，输出信号在频域和系统函数相乘，换句话说，输出信号的频率只可能在输入信号的频率范围之内。在分析IC的信噪比时，讨论杂散、谐波意料之外的频率分量，这些不应该产生的分量是哪里来的？假设我输入是理想正弦信号，还会有这些非理想频率分量吗？</p><p><strong>我猜测可能的来源</strong></p><ul><li>系统是非LTI系统（指系统的理想模型不能使用LTI模型概况，而非老化等非理想因素）</li><li>其它频率来自电路中的噪声</li><li>IC的输入除了信号还有电源，其它频率来自电源</li><li>实际信号在频谱上有一定的带宽</li></ul><p><strong>悬赏金额</strong><br>一顿饭钱</p><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">联系方式在侧边个人介绍<a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>]]></content>
+    
+    
+    <summary type="html">新手村庄总会有那么几块悬赏板</summary>
+    
+    
+    
+    <category term="其它" scheme="https://devil-sx.github.io/categories/%E5%85%B6%E5%AE%83/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>费米势的物理含义</title>
+    <link href="https://devil-sx.github.io/2022/12/%E5%BE%AE%E7%94%B5%E5%AD%90%E5%99%A8%E4%BB%B6/%E8%B4%B9%E7%B1%B3%E5%8A%BF%E7%9A%84%E7%89%A9%E7%90%86%E5%90%AB%E4%B9%89/"/>
+    <id>https://devil-sx.github.io/2022/12/%E5%BE%AE%E7%94%B5%E5%AD%90%E5%99%A8%E4%BB%B6/%E8%B4%B9%E7%B1%B3%E5%8A%BF%E7%9A%84%E7%89%A9%E7%90%86%E5%90%AB%E4%B9%89/</id>
+    <published>2022-12-15T09:02:20.000Z</published>
+    <updated>2023-02-06T08:03:50.639Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><pre><code>⛏ 作者正在摸鱼，该推文尚未完成</code></pre><p>费米能级，从大二下《半导体物理》到大三上《微电子器件》，绕不开的一个概念，可它究竟是什么，书本只曰：“载流子的化学势”。但若不搞清费米能级到底为何，所有在此之上建立的概念只可意会不能真正理解。于是我想尽可能搞清楚费米能级的含义。</p><h1 id="化学势、费米能级"><a href="#化学势、费米能级" class="headerlink" title="化学势、费米能级"></a>化学势、费米能级</h1><p>在开始弄清费米能级的含义之前，先区分几个概念。<br><strong>化学势(total chemical potential)</strong> 的Wiki中写道：<em>”每增加一摩尔物质自由能的总变化(total change in free energy per extra mole of substance)。“</em> 化学势可以被分为内化学势和外化学势，即</p><script type="math/tex; mode=display">\mu_{tot}=\mu_{int}+\mu_{ext}</script><p>定义看不懂，但只要明白化学势是包括了<strong>内</strong>和<strong>外</strong>的概念。内和外之分，要看研究的对象，在半导体物理里，研究的对象是载流子粒子，那么外便是很熟悉的粒子外部相互作用势能，内包括了粒子内部相互作用能量（例如夸克之间的作用）和动能。<br>问题：研究的对象到底是？</p><p>好像“化学势”类似于”能量“的概念，但能量只考虑动能和势能，而不考虑内在的其他能量，比如让火药爆炸的化学能。看来引入”化学(chemical)“二字，便有描述蕴藏在内在能量的意味。</p><p>既然<strong>费米能级(Fermi level)</strong> 为载流子的化学势，那么费米能级便包括势能一项。讨论势能便好奇势能零点在哪，Wiki中写道：<em>”费米能级并不包括将电子移除出体系的功(The Fermi level does not include the work required to remove the electron from wherever it came from)。“</em> 也就是说，以电子脱离体系的束缚——自由电子为势能零点。在能带论中，我们主要关注能量之间的相对关系，不过在理论推导中，需要记住此概念。</p><p>可费米能级为什么能表示粒子在系统的能量分布，那就得搞清楚<strong>费米-狄拉克分布</strong>的含义了。</p><p>另外，不要混淆费米能级(Fermi level)和费米能量(Fermi energy)的概念。</p><h1 id="费米-狄拉克分布"><a href="#费米-狄拉克分布" class="headerlink" title="费米-狄拉克分布"></a>费米-狄拉克分布</h1><p><a href="https://en.wikipedia.org/wiki/Fermi%E2%80%93Dirac_statistics">Fermi–Dirac statistics - Wikipedia</a></p><p><a href="https://en.wikipedia.org/wiki/Maxwell%E2%80%93Boltzmann_statistics">Maxwell–Boltzmann statistics - Wikipedia</a></p><p><a href="https://en.wikipedia.org/wiki/Fermi_energy">Fermi energy - Wikipedia</a></p><p><a href="https://en.wikipedia.org/wiki/Fermi_level">Fermi level - Wikipedia</a></p><p><a href="https://en.wikipedia.org/wiki/Chemical_potential#Electrochemical.2C_internal.2C_external.2C_and_total_chemical_potential">Chemical potential - Wikipedia</a></p><p>涉及内容<br>最可几分布<br>N！的近似<br>拉格朗日乘数法<br>配分函数<br>正则系统<br>热力势(Euler Equations)</p><p>慢慢消化</p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><i class="fa-brands fa-wikipedia-w fa-lg"></i><a href="https://en.wikipedia.org/wiki/Chemical_potential#Electrochemical.2C_internal.2C_external.2C_and_total_chemical_potential">Chemical potential - Wikipedia</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;pre&gt;&lt;code&gt;⛏ 作者正在摸鱼，该推文尚未完成
+&lt;/code&gt;&lt;/pre&gt;</summary>
+      
+    
+    
+    
+    <category term="微电子器件" scheme="https://devil-sx.github.io/categories/%E5%BE%AE%E7%94%B5%E5%AD%90%E5%99%A8%E4%BB%B6/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>《通信原理》说明和勘误</title>
+    <link href="https://devil-sx.github.io/2022/12/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/%E3%80%8A%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E3%80%8B%E8%AF%B4%E6%98%8E%E5%92%8C%E5%8B%98%E8%AF%AF/"/>
+    <id>https://devil-sx.github.io/2022/12/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/%E3%80%8A%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E3%80%8B%E8%AF%B4%E6%98%8E%E5%92%8C%E5%8B%98%E8%AF%AF/</id>
+    <published>2022-12-03T10:06:33.000Z</published>
+    <updated>2022-12-20T09:33:42.432Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>WARNING🚧：本文仍在施工中</p></blockquote><p>个人学习国防工业出版社第7版《通信原理》时的笔记，包含对原书的勘误和补充说明，欢迎大家指正！<br>[图片]</p><p>本文每节会用<strong>加粗字体</strong>注明属于补充还是修正，引用原文则使用<em>斜线</em>表示<br>本博客很大一部分内容由Y.D.X指出，感谢</p><h1 id="p43-平稳过程功率谱和自相关函数的关系"><a href="#p43-平稳过程功率谱和自相关函数的关系" class="headerlink" title="p43-平稳过程功率谱和自相关函数的关系"></a>p43-平稳过程功率谱和自相关函数的关系</h1><p><strong>补充说明</strong><br>[图片]<br><em>“我们知道，非周期的功率型确知信号的自相关函数与其功率谱密度是一对傅里叶变换。这种关系对平稳随机过程同样成立。”</em><br>书p30证明了周期性的功率型确知信号的自相关函数和功率谱密度是FT的关系，但没有证明非周期的。在推广至平稳随机过程（维纳-辛钦定理）中，也同样缺少证明，这里给予补充。</p><p>非周期的功率型确知信号的自相关函数：</p><script type="math/tex; mode=display">R(\tau)=\lim_{T\rightarrow \infty}\frac1T\int _{-T/2}^{T/2} s(t)s(t+\tau)dt=\lim_{T\rightarrow \infty}\frac1T\int _{-\infty}^{+\infty} s_T(t)s_T(t+\tau)dt</script><p>其中带下标T表示对应的截断函数，积分项可看作$s_T(\tau)$和$s_T(-\tau)$的卷积</p><script type="math/tex; mode=display">s_T(-t)\leftrightarrow S_T(-f)</script><script type="math/tex; mode=display">R(\tau)\leftrightarrow \lim_{T\rightarrow \infty}\frac1T S_T(-f)S_T(f)</script><script type="math/tex; mode=display">\because R(\tau)\in R</script><script type="math/tex; mode=display">\therefore R(\tau)\leftrightarrow \lim_{T\rightarrow \infty}\frac1T S_T^*(f)S_T(f)=P(f)</script><script type="math/tex; mode=display">Q.E.D.</script><p>随机过程的自相关函数和功率/能量确知信号的自相关函数定义略有所不同，一个是对时间积分反映相邻时间差的相关性，一个是对随机变量积分反映不同时刻的相关性。当随机过程为广义平稳时，自相关函数也只与相邻时间差相关，和功率/能量确知信号具有相似性。</p><p>不会推导平稳过程功率谱密度和自相关函数之间的关系。</p><h1 id="高斯随机过程"><a href="#高斯随机过程" class="headerlink" title="高斯随机过程"></a>高斯随机过程</h1>]]></content>
+    
+    
+    <summary type="html">对国防工业出版社《通信原理》教材的勘误</summary>
+    
+    
+    
+    <category term="通信原理" scheme="https://devil-sx.github.io/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/"/>
+    
+    
+    <category term="在北理的二三事" scheme="https://devil-sx.github.io/tags/%E5%9C%A8%E5%8C%97%E7%90%86%E7%9A%84%E4%BA%8C%E4%B8%89%E4%BA%8B/"/>
+    
+    <category term="书籍勘误、笔记" scheme="https://devil-sx.github.io/tags/%E4%B9%A6%E7%B1%8D%E5%8B%98%E8%AF%AF%E3%80%81%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Verilator笔记</title>
+    <link href="https://devil-sx.github.io/2022/11/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/Verilator%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>https://devil-sx.github.io/2022/11/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/Verilator%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
+    <published>2022-11-23T11:03:53.000Z</published>
+    <updated>2023-01-05T16:06:14.006Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>KeyWords:</strong><br>仿真流程<br>波形生成</p><h1 id="测试仿真流程"><a href="#测试仿真流程" class="headerlink" title="测试仿真流程"></a>测试仿真流程</h1><ol><li>将HDL文件转换为C++文件</li><li>编译.cpp（自己写Makefile或者Verilator的编译规则）</li><li>运行编译之后的文件</li></ol><h1 id="Verilator在编译中干了什么？"><a href="#Verilator在编译中干了什么？" class="headerlink" title="Verilator在编译中干了什么？"></a>Verilator在编译中干了什么？</h1><p>使用<code>type</code>命令找到<code>verilator</code>命令的位置<br>查看命令内容（看不懂如何实现，但是知道有什么用）<br>使用<code>verilator</code>来编译（就是用<code>--build</code>参数），C++文件需要叫<code>sim_main.cpp</code>，Verilog顶层文件需要叫<code>top.v</code></p><h1 id="Verilator是如何进行VM-TRACE的定义的？"><a href="#Verilator是如何进行VM-TRACE的定义的？" class="headerlink" title="Verilator是如何进行VM_TRACE的定义的？"></a>Verilator是如何进行VM_TRACE的定义的？</h1><p>在查看创造波形的示例代码<code>make_tracing_c</code>时，发现有<code>#if VM_TRACE</code>，但却找不到在哪定义的<br>查看示例的<code>example</code>发现调用了带<code>--trace</code>参数的<code>verilator</code>命令，应该和这个有关<br>但具体<code>verilator</code>到底是怎么读取参数执行的，并不知道<br>在编译后的文件里，<code>obj_dir</code>下的<code>Vtop_classes.mk</code>里将该定义赋予1<code>VM_TRACING = 1</code></p>]]></content>
+    
+    
+    <summary type="html">个人一生一芯Verilator笔记</summary>
+    
+    
+    
+    <category term="工具配置" scheme="https://devil-sx.github.io/categories/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/"/>
+    
+    
+    <category term="在北理的二三事" scheme="https://devil-sx.github.io/tags/%E5%9C%A8%E5%8C%97%E7%90%86%E7%9A%84%E4%BA%8C%E4%B8%89%E4%BA%8B/"/>
+    
+    <category term="Verilator" scheme="https://devil-sx.github.io/tags/Verilator/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>机器人开发板大创</title>
+    <link href="https://devil-sx.github.io/2022/11/%E5%85%B6%E5%AE%83/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%80%E5%8F%91%E6%9D%BF%E5%A4%A7%E5%88%9B/"/>
+    <id>https://devil-sx.github.io/2022/11/%E5%85%B6%E5%AE%83/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%80%E5%8F%91%E6%9D%BF%E5%A4%A7%E5%88%9B/</id>
+    <published>2022-11-16T01:19:22.000Z</published>
+    <updated>2023-02-06T02:19:15.809Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本篇项目灵感来自于<a href="https://ysyx.oscc.cc/docs/">中科院计算所一生一芯项目</a></p><p>每年大创立项季，小坦克上总能看到许许多多同学求捞大创。许多学生带着一腔热血涌入大创项目，但由于各种不可抗力因素，往往最后早早开摆，到结项时才发现什么都没做，综测+1。这个大创是我的一个尝试，我由衷地希望大家在大创中能真正学到东西，培养自己的能力。因此这个大创不主要以项目为导向，而是<strong>以学习为导向</strong>。最后一年过去，大家能独立将成品做出来固然不错，但我更想看到大家在这一年中真正从实践中学习，吸收内化为自己成长的养分。</p><p><img src="Board.png" alt="复用一下大创海报"></p><p><strong>Q：既然不以项目为导向，不担心无法结项等问题吗？</strong><br><strong>A：</strong> 该项目是队内大创，也就是我们已经有成熟的解决方案，想要结项绰绰有余。但这并不意味着你可以直接开摆。将这些告诉大家，是希望大家没有后顾之忧将重心放在学习知识而不是项目进度之上。我希望大家独立设计制作出成品，并进一步在往年的方案上做出改进。若直接开摆，我也没有办法。能否学到东西、能否完成项目全依托大家的自觉。</p><h1 id="如何科学地提问？"><a href="#如何科学地提问？" class="headerlink" title="如何科学地提问？"></a>如何科学地提问？</h1><p>我强烈地推荐大家阅读这两篇文章<a href="https://github.com/tangx/Stop-Ask-Questions-The-Stupid-Ways/blob/master/README.md">Stop-Ask-Questions-The-Stupid-Ways</a> ，<a href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md">How-To-Ask-Questions-The-Smart-Way</a>，学习科学优雅的提问方法。</p><p>项目的大部分内容还是依靠大家自学，关于如何自学，无外乎三个好朋友<strong>STFW</strong>，<strong>RTFM</strong>和<strong>RTFSC</strong>（读了上面两篇文章就知道这个是什么）。</p><p>善用搜索引擎，既然这个出现了这个问题，你肯定不是第一个遇到的。网络上往往有许多解决方案。同时，我强烈推荐大家减少使用百度的频率，能读英文不读中文，特别是当项目深入的时候。Google&gt;Bing&gt;Baidu。</p><p><strong>Q：怎么提问还需要学习吗？</strong><br><strong>A：</strong> 是的。许多同学遇到无法解决的问题往往第一个想法直接抛给大佬，特别在学习C语言和计算机相关内容时，担任朋辈导师的经历也让我深深体会到了这点。学习到新东西，是依靠自己吸收理解，像弱智一样的提问只会害了自己（这不是为了攻击大家，我曾经也是这样走过来的）。学会正确科学的提问方式尤为重要。更多内容阅读<a href="https://ysyx.oscc.cc/docs/prestudy/0.1.html">ysyx项目解释</a></p><p><strong>Q：中文社区有现有的资源，我为什么还要费劲去看英文？</strong><br><strong>A：</strong> 随着学习的深入，你会发现中文社区的资料越来越少。CSDN上许多内容都是别人调试的经验，很多往往不详细、有错误，而且单单会解决这个问题并不能让你成长，看官方的英文文档是学习到新知识最直接高效的方式。如果无法摆脱依赖百度，只能说你放弃了成长的机会。</p><p><strong>Q：既然靠自学，那我参加这个大创还有什么意义？我为什么不直接自己学习？</strong><br><strong>A：</strong> 说得没错，完全靠自己也是可以学会这些东西的。这个项目的意义在于给刚入门的新人学习路径一个大致的方向，避免走弯路；并且提供这个平台，定期check和push进度，激励大家。此外更希望大家掌握学习的方法，而不是知识本身。</p><h1 id="项目时间节点规划"><a href="#项目时间节点规划" class="headerlink" title="项目时间节点规划"></a>项目时间节点规划</h1><p>可以先看看<a href="https://space.bilibili.com/20259914?spm_id_from=333.337.0.0">野生钢铁侠</a> 的视频，了解了解学会设计电路板在DIY中的意义。</p><p>大创时间一年，明年6月之前项目要基本成型，也就是说，到时候不单要有完整的设计解决方案，还要做出实际可用的成品。对于没有接触过嵌入式同学时间确实紧迫。不过大家也不用过度紧张，大家都有自己的时间安排，按着自己的节奏来就好。</p><p>目前的节点规划<br><div class="mermaid-wrap"><pre class="mermaid-src" hidden>  gantt    title Robot Control Board Project    dateFormat  YYYY-MM-DD    section 总体规划    最小系统板原理 :i1, 2022-11-20, 40d    最小系统板实物 :i2, 2023-2-30, 10d    学习芯片手册，画板子 : i3, after i1, 50d    学习程序，电控 :i5, 2023-3-1, 30d    搭好外设，测试控制机器人: i6, 2023-4-1, 30d    继续开发迭代: i7, 2023-4-1, 60d     section czy    最小系统板 :a1, 2022-11-20, 30d    section lzq    最小系统板 :a2, 2022-11-21,30d     section zzx    最小系统板 :a2, 2022-11-21,30d     section zzy    最小系统板 :a2, 2022-11-21,30d   </pre></div></p><p>在学习时，需要大家<a href="https://docs.qq.com/sheet/DRlVoUXpUbEZLdFZa?tab=BB08J2">在这</a>建立自己的<strong>学习记录</strong>。</p><h2 id="学习阶段-最小系统板（1个月）"><a href="#学习阶段-最小系统板（1个月）" class="headerlink" title="学习阶段-最小系统板（1个月）"></a>学习阶段-最小系统板（1个月）</h2><p>这个阶段，大家主要是自己学习最小系统板相关知识，能独立自主地用AD画出最小系统板的PCB版图。</p><p><strong>几个目标：</strong></p><ul><li>学会AD的使用</li><li>弄清最小系统板的原理</li><li>学会阅读芯片手册Datasheet</li><li>独立绘制出自己的最小系统板，有能力发嘉立创打板、焊接并成功点亮小灯。</li></ul><p><strong>注意：不要使用AD自动布线！不要使用自动布线！不要使用自动布线！</strong></p><p>最近要到考试周了，大家时间也很紧，还是以自己的其他安排优先。大创项目进度也一般主要是在寒假推动。不过线下学习交流还是更加方便一些，在寒假之前完成也可以带大家使用工训楼的设备焊接。量力而行吧！一个月之内能用AD绘制出最小系统板，朝着这个ddl去吧。</p><h3 id="扩展内容——Robomaster底控板的设计"><a href="#扩展内容——Robomaster底控板的设计" class="headerlink" title="扩展内容——Robomaster底控板的设计"></a>扩展内容——Robomaster底控板的设计</h3><p>（待完善）</p><h2 id="通信协议和电控"><a href="#通信协议和电控" class="headerlink" title="通信协议和电控"></a>通信协议和电控</h2><p>（待完善）</p>]]></content>
+    
+    
+    <summary type="html">我们是自豪的电焊工人！</summary>
+    
+    
+    
+    <category term="其它" scheme="https://devil-sx.github.io/categories/%E5%85%B6%E5%AE%83/"/>
+    
+    
+    <category term="在北理的二三事" scheme="https://devil-sx.github.io/tags/%E5%9C%A8%E5%8C%97%E7%90%86%E7%9A%84%E4%BA%8C%E4%B8%89%E4%BA%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>电容</title>
+    <link href="https://devil-sx.github.io/2022/11/%E6%A8%A1%E6%8B%9F%E7%94%B5%E8%B7%AF/%E7%94%B5%E5%AE%B9/"/>
+    <id>https://devil-sx.github.io/2022/11/%E6%A8%A1%E6%8B%9F%E7%94%B5%E8%B7%AF/%E7%94%B5%E5%AE%B9/</id>
+    <published>2022-11-06T01:40:45.000Z</published>
+    <updated>2023-02-06T08:03:09.951Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>做电路绕不开电阻电容这对好兄弟</p></blockquote><pre><code>⛏ 作者正在摸鱼，该推文尚未完成</code></pre><h1 id="电容工艺"><a href="#电容工艺" class="headerlink" title="电容工艺"></a>电容工艺</h1><h2 id="非极性电容"><a href="#非极性电容" class="headerlink" title="非极性电容"></a>非极性电容</h2><p>大都是<strong>MLCC</strong>（多层陶瓷电容），注意封装不单影响大小，还影响耐压。0402耐压值较低（队里一本电容本0402 1uF 耐压只有10V，而6.8nF耐压有50V，另一本的10nF也有50V耐压），建议只用在5V及以下电源电路中 。1210 耐压高点。</p><h2 id="电解电容"><a href="#电解电容" class="headerlink" title="电解电容"></a>电解电容</h2><p>电解电容具有极性，但为什么有极性我尚不明白<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="警告：这玩意随时有可能爆炸">[1]</span></a></sup>。<br><strong>钽电容：</strong> 黄色封装，注意封装上的标记是<strong>正极</strong>！充放电快，ESR小。<br><strong>铝电容：</strong> 块头较大，充放电慢，ESR大，但容值会大。</p><h1 id="电容功能"><a href="#电容功能" class="headerlink" title="电容功能"></a>电容功能</h1><p>根据连接方式的不同，串联作为隔直功能，并联作为去耦、旁路功能</p><h1 id="隔直电容-Blocking"><a href="#隔直电容-Blocking" class="headerlink" title="隔直电容(Blocking)"></a>隔直电容(Blocking)</h1><p>去除直流成分消除直流偏置<br>特别是多级放大电路中，直流偏置会越放越大，隔直电容不可缺少<br>因此要容值偏大，降低对需要的交流信号的衰减作用</p><h2 id="去耦电容-Decoupling"><a href="#去耦电容-Decoupling" class="headerlink" title="去耦电容(Decoupling)"></a>去耦电容(Decoupling)</h2><p>降低IC对电源的影响</p><h2 id="旁路电容-Bypass"><a href="#旁路电容-Bypass" class="headerlink" title="旁路电容(Bypass)"></a>旁路电容(Bypass)</h2><p>降低电源对IC的影响</p><p>并联在传输线上，高频的噪声通过旁路电容流掉，达到滤噪声的目的。一般使用<strong>一个大电容并联一个小电容</strong></p><p>但是大电容和小电容并联等效容值相加，那么为什么不用一个更大容值的电容代替呢？</p><p>原来是由于制造工艺的原因，大容值的电容往往带有较大的感抗，高频特性反而不好，常常采用一大电容，一小电容并联的形式去去掉高频噪声<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="这里分析电容模型时，应当将电容看作RLC串联，至于为什么是串联，我尚不明白">[2]</span></a></sup><br><img src="Impendance.png" alt="常见MLCC电容阻抗曲线"><br>RLC串联回路工作在谐振频率时，电路的阻抗最小，此时对信号的衰减效果最小<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="所以选择电容时要注意电容的谐振频率">[3]</span></a></sup></p><p>频率到达谐振点之前，电容呈现容性，频率到达谐振点之后，电容呈现感性。<br>容值越大的电容谐振频率越低，高频特性越不好。不过似乎呈现感性时，在一定的频率，电容的阻抗大小几乎和容值参数没关系，并联是为了降低阻抗，为什么要并联一个容值更小的电容呢？<sup id="fnref:4"><a href="#fn:4" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="未考虑相位的影响，不过滤噪声似乎不需要考虑这个？也可能从成本的角度或者这个图并不详尽。">[4]</span></a></sup></p><p>对于47uF的电容，谐振频率在1MHz左右，一般使用MLCC用不到这么大的，谐振频率更高，对于低频电路不需要考虑感抗问题。</p><p>在<a href="https://ds.murata.co.jp/simsurfing/mlcc.html?lcid=zh-cn">该网站</a>可以查询常见MLCC电容的参数曲线。</p><h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><i class="fa-brands fa-wikipedia-w fa-lg"></i><a href="https://en.wikipedia.org/wiki/Electrolytic_capacitor">Electrolytic capacitor - Wikipedia</a></p><p><a href="https://blog.csdn.net/handsomewangjg/article/details/47913775">旁路电容为何通常由一大一小两个电容并联<em>handsomewangggg的博客-CSDN博客</em>为什么滤波电容的电容值是一大一小</a></p><p><a href="https://blog.csdn.net/weixin_42005993/article/details/106504091"> 陶瓷电容的ESR-谐振频率去哪儿查？_硬件工程师炼成之路的博客-CSDN博客</a></p><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">警告：这玩意随时有可能爆炸<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">这里分析电容模型时，应当将电容看作RLC串联，至于为什么是串联，我尚不明白<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">所以选择电容时要注意电容的谐振频率<a href="#fnref:3" rev="footnote"> ↩</a></span></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">4.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">未考虑相位的影响，不过滤噪声似乎不需要考虑这个？也可能从成本的角度或者这个图并不详尽。<a href="#fnref:4" rev="footnote"> ↩</a></span></li></ol></div></div>]]></content>
+    
+    
+    <summary type="html">做电路绕不开电阻电容这对好兄弟</summary>
+    
+    
+    
+    <category term="模拟电路" scheme="https://devil-sx.github.io/categories/%E6%A8%A1%E6%8B%9F%E7%94%B5%E8%B7%AF/"/>
+    
+    
+    <category term="电容" scheme="https://devil-sx.github.io/tags/%E7%94%B5%E5%AE%B9/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu安装配置Rime输入法</title>
+    <link href="https://devil-sx.github.io/2022/11/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/Ubuntu%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AERime%E8%BE%93%E5%85%A5%E6%B3%95/"/>
+    <id>https://devil-sx.github.io/2022/11/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/Ubuntu%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AERime%E8%BE%93%E5%85%A5%E6%B3%95/</id>
+    <published>2022-11-03T07:29:06.000Z</published>
+    <updated>2023-02-06T02:02:44.315Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>系统环境:</strong> Ubuntu 22.04</p><p>大三啦终于开始在本机上装Liunx系统啦，望着崭新的系统，再次感受到三年前买新电脑的欣喜和激动🥰</p><p>新系统首先要解决不能输入中文的问题。那都用上Linux了，再用搜狗输入法是不是太low了，有没有一款自由度极高的开源输入法呢，Rime输入法进入了我的眼帘。于是开始了一上午的安装配置Rime之旅<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="确实配了个输入法配了一上午😓">[1]</span></a></sup>。</p><h1 id="安装Rime"><a href="#安装Rime" class="headerlink" title="安装Rime"></a>安装Rime</h1><p>Rime输入法在不同平台拥有不同的名称，在Liunx中叫做<strong>中州韻</strong>。Rime有基于ibus和fcitx的版本，我选择的是ibus。</p><p>根据<a href="https://github.com/rime/home/wiki/RimeWithIBus">官方文档教程</a>，Ubuntu上只需一句命令便可安装Rime：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ibus-rime</span><br></pre></td></tr></table></figure></p><p>好啦，终端提示安装成功了，可怎么没看到输入法呢？</p><p>别急，还得在<strong>Linux系统设置</strong>里选择Rime输入法，在设置里选择输入法基于ibus，并添加Rime输入法，就可以看Rime的图标啦。终于可以输入中文啦！</p><h1 id="配置Rime"><a href="#配置Rime" class="headerlink" title="配置Rime"></a>配置Rime</h1><h2 id="安装输入方案"><a href="#安装输入方案" class="headerlink" title="安装输入方案"></a>安装输入方案</h2><p>Rime默认使用明月拼音，还是繁体，这对于习惯微软双拼的我大不习惯，于是接下来开始修改输入方案。</p><p>同样是<a href="https://github.com/rime/home/wiki/RimeWithIBus">官方文档教程</a> 中，使用一句命令便可以安装输入法案，这里安装双拼方案是：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 雙拼</span><br><span class="line">sudo apt-get install librime-data-double-pinyin</span><br><span class="line"># 包含了许多双拼方案，double_pinyin_mspy.schema.yaml就是微软双拼</span><br></pre></td></tr></table></figure><br><a href="https://github.com/rime/plum#packages">官方输入方案</a>，当然高级玩家也可以自己配置输入方案！</p><h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>安装好了，接下来就是即头疼也喜欢的配置过程了。</p><p>查阅<a href="https://github.com/rime/home/wiki/RimeWithSchemata">官方文档</a>，Rime的数据文件放在<strong>两个位置</strong>——</p><p><img src="Rime_Share.png" alt="共享资料文件夹"><br><img src="Rime_User.png" alt="用户资料文件夹"></p><p>在共享资料文件夹下可以看到刚刚安装的双拼输入方案和默认安装的明月拼音方案。</p><p>Rime配置的原理大概就是，先读取共享资料文件夹下的配置作为模板，再结合用户文件夹的配置文件作为补丁，重新部署生成配置文件。</p><p>所以共享资料文件夹默认用户是没有修改权限的，这是Rime官方为了使输入法能够运行的基础配置文件。即使你用户配置文件改崩了，都可以保证输入法至少能运行，官方也不建议用户修改这部分的文件（我一开始以为是要修改共享资料文件夹，为此还修改了文件夹权限😂）。</p><p>默认用户文件夹下是没有<code>.yaml</code>配置文件的。/build里是部署好的文件，当然直接修改这里也是可以的，不过每次部署都会覆盖，不是正确的食用姿势<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="在网上还看到说修改/bulid下的😓">[2]</span></a></sup>。</p><p>此时可以参考<strong>共享资料文件夹</strong>下的<code>.yaml</code>配置文件，结合官方文档去查看每个配置文件的作用，并在<strong>用户文件夹</strong>下新建名称对应带<code>.custom</code>的.yaml文件。比如要修改<code>default.yaml</code>，就在用户目录下新建<code>default.custom.yaml</code>。</p><p>然后在.custom中重新定义需要修改的属性<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="一般修改在default里修改默认输入方案，ibus-rime里修改水平/垂直样式，在具体的输入方案文件修改默认使用简体(reset: 1)大概就可以食用啦">[3]</span></a></sup>，然后点击部署就可以正确运行啦——</p><p>并没有，什么变化都没有发生。</p><p>我在这里卡了很久，反复确认是不是目录搞错了。最后发现所有的用户修改项都必须放在<code>patch:</code>属性下，其次<code>.yaml</code>文件不允许用制表符缩进，必须使用空格。</p><p>示例：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">patch:</span><br><span class="line">  schema_list:</span><br><span class="line">    - &#123;schema: double_pinyin_mspy&#125;</span><br></pre></td></tr></table></figure><br>重新部署，成功！</p><p>开启愉快的Linux输入体验之旅吧！</p><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">确实配了个输入法配了一上午😓<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">在网上还看到说修改/bulid下的😓<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">一般修改在default里修改默认输入方案，ibus-rime里修改水平/垂直样式，在具体的输入方案文件修改默认使用简体(reset: 1)大概就可以食用啦<a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;p&gt;&lt;strong&gt;系统环境:&lt;/strong&gt; Ubuntu 22.04&lt;/p</summary>
+      
+    
+    
+    
+    <category term="工具配置" scheme="https://devil-sx.github.io/categories/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/"/>
+    
+    
+    <category term="Rime输入法" scheme="https://devil-sx.github.io/tags/Rime%E8%BE%93%E5%85%A5%E6%B3%95/"/>
+    
+    <category term="Linux" scheme="https://devil-sx.github.io/tags/Linux/"/>
+    
+    <category term="Ubuntu" scheme="https://devil-sx.github.io/tags/Ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>逼近理想滤波器的路上</title>
+    <link href="https://devil-sx.github.io/2022/10/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%80%BC%E8%BF%91%E7%90%86%E6%83%B3%E6%BB%A4%E6%B3%A2%E5%99%A8%E7%9A%84%E8%B7%AF%E4%B8%8A/"/>
+    <id>https://devil-sx.github.io/2022/10/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%80%BC%E8%BF%91%E7%90%86%E6%83%B3%E6%BB%A4%E6%B3%A2%E5%99%A8%E7%9A%84%E8%B7%AF%E4%B8%8A/</id>
+    <published>2022-10-31T03:30:46.000Z</published>
+    <updated>2023-02-06T02:28:55.494Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><pre><code>📢该推文部分内容是作者个人猜测，谨慎阅读。欢迎在评论区纠正！⛏ 作者正在摸鱼，该推文尚未完成</code></pre><p>我们总希望设计完美无瑕，精确地吻合设定的指标。可设计滤波器时，却无法抵达理想滤波器的完美，就如同芝诺悖论中永远无法并排乌龟的兔子。</p><h1 id="什么是理想滤波器"><a href="#什么是理想滤波器" class="headerlink" title="什么是理想滤波器"></a>什么是理想滤波器</h1><p>在回答这个问题前，首先要弄清什么是理想滤波器。我认为理想滤波器应具有以下三个特点：</p><ol><li>通带增益恒定为1</li><li>阻带增益恒定为0</li><li>过渡带为0</li></ol><h1 id="理想滤波器为什么不可实现"><a href="#理想滤波器为什么不可实现" class="headerlink" title="理想滤波器为什么不可实现"></a>理想滤波器为什么不可实现</h1><p>那么为什么理想滤波器是不可实现的，只能去逼近呢？查阅课本和网络告诉我们，理想滤波器的h(t)在t<0时不为0，**不满足因果性**  。<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="不过因果律是恒成立的真理吗？现在看来，是的，即使是相对论也不违反因果律（量子论俺实在没弄懂）。也许随着科学的发展，某一天因果律也会被证伪呢？">[1]</span></a>&lt;/sup&gt;我还没有看到证明<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="挖个坑，以后把证明补上">[2]</span></a></sup>，那么只能先感性的角度去理解这个关系。</p><p>首先，理想滤波器很明显满足一个特点，便是存在间断点。间断，从时域来看，例如冲激函数、单位阶跃函数，代表着在信号值瞬间迅速变化，对应着高频分量不为0。考虑极限的思想，在时域是瞬间变化，那么在频域应当是频率趋于无穷<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="那为什么正负无穷都有呢？这是因为信号是实信号，频域满足共轭偶对称。">[3]</span></a></sup>。以此类推，频域存在间断点，那么也代表着时域存在无穷的信号<sup id="fnref:4"><a href="#fn:4" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="这里目前不知道怎么说明时域正负信号都有">[4]</span></a></sup>。</p><p>其次看到网上的一个观点，时域的有限对应频域的无限，反之亦然。从直观上来感觉，这个是对的，这个观点便应该触及该问题的本质了。</p><p>（Y.D.X指出，可以从不确定性原理入手。不确定性原理描述不同表象间的关系，正是使用了Fourier变换，这个思路很有可能是正确的。待日后有时间补上详细证明）</p><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">不过因果律是恒成立的真理吗？现在看来，是的，即使是相对论也不违反因果律（量子论俺实在没弄懂）。也许随着科学的发展，某一天因果律也会被证伪呢？<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">挖个坑，以后把证明补上<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">那为什么正负无穷都有呢？这是因为信号是实信号，频域满足共轭偶对称。<a href="#fnref:3" rev="footnote"> ↩</a></span></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">4.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">这里目前不知道怎么说明时域正负信号都有<a href="#fnref:4" rev="footnote"> ↩</a></span></li></ol></div></div>]]></content>
+    
+    
+    <summary type="html">理想滤波器，可远观而不可实现也</summary>
+    
+    
+    
+    <category term="信号处理" scheme="https://devil-sx.github.io/categories/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/"/>
+    
+    
+    <category term="滤波器" scheme="https://devil-sx.github.io/tags/%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>为什么说DFT不是真正的傅里叶变换</title>
+    <link href="https://devil-sx.github.io/2022/10/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4DFT%E4%B8%8D%E6%98%AF%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/"/>
+    <id>https://devil-sx.github.io/2022/10/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4DFT%E4%B8%8D%E6%98%AF%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/</id>
+    <published>2022-10-31T01:46:08.000Z</published>
+    <updated>2022-12-23T06:25:07.151Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>上课时，老师一直强调“FT<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="这里的FT指的是广义的傅里叶变换，而非专指时域连续信号到频域的变换。">[1]</span></a></sup>只有四种，DFT不是真正的FT”，我当时无法理解：“从数学上看，傅里叶变换不就是时域和频域的一种映射关系吗，这种映射关系只是数学上的一种形式，那DFT为何不是呢？”</p><p>接触了数字滤波器，对此才略微理解。系统的单位冲激响应和系统函数同样能表示这个系统，但若对h(n)进行DFT，得到的并不是表示这个系统的系统函数H(z)，而是H(z)的抽样。</p><p>也就是说，傅里叶变换应该满足<strong>一一映射</strong>的关系，h(n)便对应H(z)，看见时域便见频域，<strong>时域和频域就好似光与影，是同一事物的两面，不可分割</strong><sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="“光与影”是一种浪漫的说法，这个比喻并不恰当。">[2]</span></a></sup>。而DFT根据变换长度的不同，h(n)会对应多个H(k)，这便是DFT隐含周期性的含义，若考虑时域和频域的周期性，那么DFT便可满足一一映射的关系了，而此时，DFT揭示的是周期的时域和周期的频域之间一一映射的关系。</p><p>同时，H(k)可以还原出h(n)，h(n)又和H(z)一一对应，因此只要通过H(z)的取样，便能还原出H(z)<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="内插公式">[3]</span></a></sup>，这个性质揭示了系统的某种对称性<sup id="fnref:4"><a href="#fn:4" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="FFT也是基于此">[4]</span></a></sup>。</p><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">这里的FT指的是广义的傅里叶变换，而非专指时域连续信号到频域的变换。<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">“光与影”是一种浪漫的说法，这个比喻并不恰当。<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">内插公式<a href="#fnref:3" rev="footnote"> ↩</a></span></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">4.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">FFT也是基于此<a href="#fnref:4" rev="footnote"> ↩</a></span></li></ol></div></div>]]></content>
+    
+    
+    <summary type="html">老师喃喃“DFT不是FT”是什么意思</summary>
+    
+    
+    
+    <category term="信号处理" scheme="https://devil-sx.github.io/categories/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/"/>
+    
+    
+    <category term="傅里叶变换" scheme="https://devil-sx.github.io/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IIR和FIR</title>
+    <link href="https://devil-sx.github.io/2022/10/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/IIR%E5%92%8CFIR/"/>
+    <id>https://devil-sx.github.io/2022/10/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/IIR%E5%92%8CFIR/</id>
+    <published>2022-10-31T01:23:03.000Z</published>
+    <updated>2023-02-06T08:09:54.845Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>IIR和FIR最主要的区别是系统单位冲激响应序列的长度不同。</p><h1 id="直观理解"><a href="#直观理解" class="headerlink" title="直观理解"></a>直观理解</h1><p><strong>反馈</strong> LTI系统具有0输入0输出的特点，单位冲激响应只在0时刻有信号输入，经过了0时刻后，输出将随时间逐渐减弱至消失。除非系统带有反馈部分，才能无限地持续下去。所以FIR的系统差分方程没有反馈项，而IIR含有。</p><p><strong>卷积</strong> $y(n)=x(n)*h(n)$，FIR系统输出只和过去有限项的输入有关，IIR系统的输出和过去所有的输入有关。系统要存储过去所有的输入，所有储存了过去的输出结果。</p><h1 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h1><script type="math/tex; mode=display">y(n)=\sum_{r=0}^M b_r\ x(n-r)+\sum_{k=1}^Na_k\ y(n-k)</script><script type="math/tex; mode=display">H(z)=\frac{\sum_{r=0}^Mb_rz^{-r}}{1-\sum_{k=1}^Na_kz^{-k}}</script><script type="math/tex; mode=display">FIR:H(z)=\sum_{k=0}^{N-1}h(n)z^{-n}</script><p>这是一个有限项级数求和，该函数有N-1个零点和N-1个<strong>位于z=0</strong>的极点<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="可能会出现零点和极点抵消的问题">[1]</span></a></sup>。在有限z平面z&gt;0处没有极点，所以$a_k=0$。<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="这个地方可以将H(z)的z换成1/z，对于有限z平面z>0的部分应当没有极点，可以看出此时$a_k$应当为0">[2]</span></a></sup></p><p>对于IIR系统，又有</p><script type="math/tex; mode=display">H(z)=\sum_{k=0}^{\infty}h(n)z^{-n}</script><p>这是一个无穷级数的求和，在z&gt;0有限z平面上存在极点，$a_k$不恒为0。<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="详细信息参考复变函数——洛朗级数，具体的推导我还没看。">[3]</span></a></sup></p><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">可能会出现零点和极点抵消的问题<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">这个地方可以将H(z)的z换成1/z，对于有限z平面z&gt;0的部分应当没有极点，可以看出此时$a_k$应当为0<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">详细信息参考复变函数——洛朗级数，具体的推导我还没看。<a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div>]]></content>
+    
+    
+    <summary type="html">系统的输出和输入、状态相关</summary>
+    
+    
+    
+    <category term="信号处理" scheme="https://devil-sx.github.io/categories/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/"/>
+    
+    
+    <category term="数字信号处理" scheme="https://devil-sx.github.io/tags/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>巴特沃斯滤波器</title>
+    <link href="https://devil-sx.github.io/2022/10/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E5%B7%B4%E7%89%B9%E6%B2%83%E6%96%AF%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
+    <id>https://devil-sx.github.io/2022/10/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E5%B7%B4%E7%89%B9%E6%B2%83%E6%96%AF%E6%BB%A4%E6%B3%A2%E5%99%A8/</id>
+    <published>2022-10-21T05:39:21.000Z</published>
+    <updated>2023-02-06T08:04:08.794Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>频域是处理分析信号与系统的重要方法。说到频域，就避不开讨论各种形式性质迥异的滤波器。而巴特沃斯滤波器无疑是其中最为典型的。</p><p>巴特沃斯滤波器(Butterworth Filter)，又称最大平坦滤波器。由巴特沃斯1930年在On The Theory of Filter Amplifiers一文中提出<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="阅读原文，这个滤波器的提出解决了之前滤波器的应用瓶颈，“最大平坦滤波器”之名也与之有关。但对于滤波器的发展历我尚未做深入的学习。">[1]</span></a></sup>。<br>本文以巴特沃斯低通滤波器为例分析。</p><h1 id="幅值特性"><a href="#幅值特性" class="headerlink" title="幅值特性"></a>幅值特性</h1><p>介绍Butterworth并非直接导出系统函数，而要从幅值特性引入……<br>Butterworth低通滤波器幅值关系<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="使用G和系统函数H区分">[3]</span></a></sup></p><script type="math/tex; mode=display">|G(\omega)|^2=\frac{1}{1+(\frac{\omega}{\omega_c})^{2N}}</script><p>当$\omega &gt;&gt;\omega_c$时</p><script type="math/tex; mode=display">|G(\omega)|\approx\frac{1}{(\frac{\omega}{\omega_c})^N}</script><p>频率每增大一倍，幅值变为原来的$\frac{1}{2^N}$，衰减速率是$20lg\frac{1}{2^N}=-20Nlg2\approx-6N\ dB/倍$<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="当计算功率增益时dB为10lg，计算电压增益时dB为20lg ">[2]</span></a></sup><br>频率每增大一倍，幅值变为原来的$\frac{1}{10^N}$，衰减速率是$20lg\frac{1}{10^N}=-20N=-20N\ dB/十倍频$</p><h1 id="相位特性"><a href="#相位特性" class="headerlink" title="相位特性"></a>相位特性</h1><p>那么Butter的系统函数长什么样呢？<br>系统函数$H(s)$在虚轴上满足上文的幅值特性，取$s=j\omega$，将关系推广到复频域</p><script type="math/tex; mode=display">|H(s)|^2=\frac{1}{1+(\frac{s}{j\omega_c})^{2N}}</script><p>由于处理的<strong>信号是实信号</strong>，那么拉式变换存在以下关系：</p><script type="math/tex; mode=display">H^*(s)=H(-s)</script><script type="math/tex; mode=display">\Rightarrow|H(s)|^2=H(s)H^*(s)=H(s)H(-s)=\frac{1}{1+(\frac{s}{j\omega_c})^{2N}}</script><p>想要从中得到$H(s)$的表达式，那么需要将$H(s)H(-s)$拆分为两式相乘的形式，而$H(s)H(-s)$可以拆成零极点表达的形式，即：</p><script type="math/tex; mode=display">H(s)H(-s)=G^2\prod_{k=1}^{2N}\frac{1}{s-s_k}</script><p>其中G&gt;0。</p><p>可以求解$s_k=\omega_c e^{j\pi\frac{2k+N-1}{2N}}\ k=1,2,3,…,2N$，这里不予证明。<br>该函数有2N个极点，且极点的分布满足一些特殊的性质。首先，这2N个极点全分布在圆$|s|=\omega_c$上；其次，在虚轴上没有极点分布；接着，极点关于实轴对称，即由N对共轭极点组成<sup id="fnref:4"><a href="#fn:4" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="严谨点说，当N为偶数时，有N对共轭极点；当N为奇数时，有N-1对共轭极点和正负实轴上的两个极点。">[4]</span></a></sup>；最后，极点还关于虚轴对称。</p><p>将$s=0$带入$H(s)H(-s)$，则可以得到$G$的表达式：</p><script type="math/tex; mode=display">G^2=\prod_{k=1}^{2N}(-s_k)=\prod_{k=1}^{N}|s_k|^2=\omega_c^{2N}</script><p>将2N个极点按照原点对称的原则，找一条穿过原点的对称轴，分别给$H(s)$和$H(-s)$分别分配N个极点，则可以得到$H(s)$的系统函数。</p><p>但我们希望这个系统是<strong>因果稳定的</strong>，那么只剩下一种分法，将位于虚轴左侧N个极点分配给$H(s)$，剩下的N个极点则分配给$H(-s)$。</p><p>Butterworth Lowpass Filter系统函数：</p><script type="math/tex; mode=display">H(s)=\prod_{k=1}^{N}\frac{\omega_c}{s-s_k}</script><p>$s_k=\omega_c e^{j\pi\frac{2k+N-1}{2N}}\ k=1,2,3,…,N$<br>这样分配之后，极点关于虚轴对称自然是不满足了，但极点关于实轴对称的结论仍然成立。</p><p>终于得到$H(s)$的系统函数了！接下来看看$H(s)$的相位特性：<br>辐角<sup id="fnref:5"><a href="#fn:5" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="不是辐角主值！">[5]</span></a></sup>满足：<script type="math/tex">Arg[H(s)]=-\sum_{k=1}^NArg(s-s_k)</script><br>若s在虚轴上</p><script type="math/tex; mode=display">Arg[G(\omega)]=-\sum_{k=1}^NArg(j\omega-s_k)=\sum_{k=1}^NArg(s_k-j\omega)</script><p>考虑一个特殊的情况，即$\omega=\omega_c$的时候，此时$j\omega$和极点$s_k$全部位于$|s|=\omega_c$上，利用<strong>圆心角、圆周角</strong>的关系，以及极点关于实轴对称的结论，可得</p><script type="math/tex; mode=display">Arg[G(\omega)]=N\times(-\frac{\pi}{2})+N\times(-\frac{\pi}{4})+2n\pi=-N\frac{\pi}{4}+2n\pi</script><p><img src="Butterworth_3.jpg" alt="阶数为3的示意图"><br>也就是阶数每增大1，在截止频率处相位翻转-45°。</p><h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><i class="fa-brands fa-wikipedia-w fa-lg"></i><a href="https://en.wikipedia.org/wiki/Butterworth_filter">Butterworth filter - Wikipedia</a></p><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">阅读原文，这个滤波器的提出解决了之前滤波器的应用瓶颈，“最大平坦滤波器”之名也与之有关。但对于滤波器的发展历我尚未做深入的学习。<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">当计算功率增益时dB为10lg，计算电压增益时dB为20lg<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">使用G和系统函数H区分<a href="#fnref:3" rev="footnote"> ↩</a></span></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">4.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">严谨点说，当N为偶数时，有N对共轭极点；当N为奇数时，有N-1对共轭极点和正负实轴上的两个极点。<a href="#fnref:4" rev="footnote"> ↩</a></span></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">5.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">不是辐角主值！<a href="#fnref:5" rev="footnote"> ↩</a></span></li></ol></div></div>]]></content>
+    
+    
+    <summary type="html">我更希望你们叫我“最大平坦滤波器”</summary>
+    
+    
+    
+    <category term="信号处理" scheme="https://devil-sx.github.io/categories/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/"/>
+    
+    
+    <category term="滤波器" scheme="https://devil-sx.github.io/tags/%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《信号与系统》勘误</title>
+    <link href="https://devil-sx.github.io/2022/10/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E3%80%8A%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F%E3%80%8B%E5%8B%98%E8%AF%AF/"/>
+    <id>https://devil-sx.github.io/2022/10/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E3%80%8A%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F%E3%80%8B%E5%8B%98%E8%AF%AF/</id>
+    <published>2022-10-18T12:41:42.000Z</published>
+    <updated>2023-01-07T04:48:22.374Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>百丽宫20级电信专业大二课程《信号与系统》使用的是这本书<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="不得不吐槽一下，国内外成熟的教材那么多，每个大学非要自己去编一本，这不浪费资源嘛。另外书后面出版社网址www.bitpress.com.cn还上不去，服了。">[1]</span></a></sup><br><img src="Signal_and_System.jpg" alt="百丽宫信号与系统2"><br>其中推导有诸多不严谨之处，给当初学习的我造成了很大的困扰。如今已结课，于此勘误，以便后人乘荫。</p><h1 id="第四章-连续时间傅里叶变换"><a href="#第四章-连续时间傅里叶变换" class="headerlink" title="第四章 连续时间傅里叶变换"></a>第四章 连续时间傅里叶变换</h1><h2 id="傅里叶函数的性质"><a href="#傅里叶函数的性质" class="headerlink" title="傅里叶函数的性质"></a>傅里叶函数的性质</h2><p>书p141，书上FT的<strong>时域微分性质</strong>有误</p><p>课本上时域微分性质的表述是</p><script type="math/tex; mode=display">\frac{d\ x(t)}{dt}\leftrightarrow j\omega X(\omega)</script><p>后续课本(p142)推导sgn(t)的频谱时<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="推导符号函数频谱还有一个办法，对双边信号的频谱取极限">[2]</span></a></sup>，利用了这个结论，通过$2\delta(t)=\frac{d\ sgn(t)}{dt}$，结合时域微分性质，从$\delta (t)$的频谱推导sgn(t)的频谱<br>但若考虑到$\delta(t)=\frac{d\ u(t)}{dt}$，若采用同样的方法，得到的u(t)频谱和同页(p142)中的不一样，出现了冲突<br>从后面FT的时域积分性质也可以看出来，时域微分性质和时域积分性质在表达式上并不对称，从直觉上也是不对的</p><p>实际上，时域微分性质正确的表述应当是<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="同学告诉我的，我没有仔细推导考虑">[3]</span></a></sup></p><script type="math/tex; mode=display">\frac{d\ x(t)}{dt}\leftrightarrow j\omega X(\omega)+\pi[x(-\infty)+x(+\infty)]\delta(\omega)</script><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">不得不吐槽一下，国内外成熟的教材那么多，每个大学非要自己去编一本，这不浪费资源嘛。另外书后面出版社网址www.bitpress.com.cn还上不去，服了。<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">推导符号函数频谱还有一个办法，对双边信号的频谱取极限<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">同学告诉我的，我没有仔细推导考虑<a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div>]]></content>
+    
+    
+    <summary type="html">对北京理工大学出版社《信号与系统》教材的勘误</summary>
+    
+    
+    
+    <category term="信号处理" scheme="https://devil-sx.github.io/categories/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/"/>
+    
+    
+    <category term="在北理的二三事" scheme="https://devil-sx.github.io/tags/%E5%9C%A8%E5%8C%97%E7%90%86%E7%9A%84%E4%BA%8C%E4%B8%89%E4%BA%8B/"/>
+    
+    <category term="书籍勘误、笔记" scheme="https://devil-sx.github.io/tags/%E4%B9%A6%E7%B1%8D%E5%8B%98%E8%AF%AF%E3%80%81%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我的文章</title>
+    <link href="https://devil-sx.github.io/2022/10/%E6%88%91%E7%9A%84%E6%96%87%E7%AB%A0/"/>
+    <id>https://devil-sx.github.io/2022/10/%E6%88%91%E7%9A%84%E6%96%87%E7%AB%A0/</id>
+    <published>2022-10-05T10:50:45.000Z</published>
+    <updated>2022-12-14T13:40:22.167Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ol><li>【个人兴趣】<a href="https://devil-sx.github.io/pdf/SinglePowerSupply.pdf">单电源供电运放滤波电路</a>：电赛校内测试赛所写。仿真的时候总是仿不出来，电路也就没搭出来，后来发现是直流偏执点没有配置好。感受到做实际电路和理论的差别</li><li>【学校作业】<a href="https://devil-sx.github.io/pdf/IC_Experiment.pdf">集成电路设计实践II实验报告</a>：要求自己用管子搭D触发器，这时才懂得了什么叫“主从”触发器</li><li>【学校作业】<a href="https://devil-sx.github.io/pdf/IC_Paper_Reasearch.pdf">集成电路设计实践II调研报告</a>：调研英文的时候很痛苦，弄了很久，但写完一看没有什么东西。尝试用Latex写论文和使用IEEE的格式。</li></ol>]]></content>
+    
+    
+    <summary type="html">对我而言，每篇文章就像一个里程碑</summary>
+    
+    
+    
+    
+  </entry>
+  
+</feed>
