@@ -6,7 +6,7 @@
   <link href="https://devil-sx.github.io/atom.xml" rel="self"/>
   
   <link href="https://devil-sx.github.io/"/>
-  <updated>2023-02-07T01:57:37.922Z</updated>
+  <updated>2023-02-08T09:25:07.941Z</updated>
   <id>https://devil-sx.github.io/</id>
   
   <author>
@@ -15,6 +15,48 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux权限管理</title>
+    <link href="https://devil-sx.github.io/2023/02/Linux/Linux%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/"/>
+    <id>https://devil-sx.github.io/2023/02/Linux/Linux%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</id>
+    <published>2023-02-08T09:23:49.000Z</published>
+    <updated>2023-02-08T09:25:07.941Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;用户&quot;&gt;&lt;a href=&quot;#用户&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="linux" scheme="https://devil-sx.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>那个跳楼的少年</title>
+    <link href="https://devil-sx.github.io/2023/02/%E9%9A%8F%E8%AE%B0%E6%84%9F%E6%83%B3/%E9%82%A3%E4%B8%AA%E8%B7%B3%E6%A5%BC%E7%9A%84%E5%B0%91%E5%B9%B4/"/>
+    <id>https://devil-sx.github.io/2023/02/%E9%9A%8F%E8%AE%B0%E6%84%9F%E6%83%B3/%E9%82%A3%E4%B8%AA%E8%B7%B3%E6%A5%BC%E7%9A%84%E5%B0%91%E5%B9%B4/</id>
+    <published>2023-02-07T14:30:10.000Z</published>
+    <updated>2023-02-07T15:08:19.811Z</updated>
+    
+    
+    <summary type="html">愿父母和孩子多一些理解，少一些悲剧</summary>
+    
+    
+    
+    <category term="随记感想" scheme="https://devil-sx.github.io/categories/%E9%9A%8F%E8%AE%B0%E6%84%9F%E6%83%B3/"/>
+    
+    
+    <category term="思考" scheme="https://devil-sx.github.io/tags/%E6%80%9D%E8%80%83/"/>
+    
+  </entry>
   
   <entry>
     <title>FDM有限差分法</title>
@@ -153,22 +195,22 @@
   
   <entry>
     <title>Verilator笔记</title>
-    <link href="https://devil-sx.github.io/2022/11/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/Verilator%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>https://devil-sx.github.io/2022/11/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/Verilator%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
+    <link href="https://devil-sx.github.io/2022/11/%E8%8A%AF%E7%89%87%E8%AE%BE%E8%AE%A1/Verilator%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>https://devil-sx.github.io/2022/11/%E8%8A%AF%E7%89%87%E8%AE%BE%E8%AE%A1/Verilator%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
     <published>2022-11-23T11:03:53.000Z</published>
-    <updated>2023-01-05T16:06:14.006Z</updated>
+    <updated>2023-02-08T08:37:45.435Z</updated>
     
     
-    <summary type="html">个人一生一芯Verilator笔记</summary>
+    <summary type="html">Verilator仿真学习笔记</summary>
     
     
     
     <category term="工具配置" scheme="https://devil-sx.github.io/categories/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/"/>
     
     
-    <category term="在北理的二三事" scheme="https://devil-sx.github.io/tags/%E5%9C%A8%E5%8C%97%E7%90%86%E7%9A%84%E4%BA%8C%E4%B8%89%E4%BA%8B/"/>
-    
     <category term="Verilator" scheme="https://devil-sx.github.io/tags/Verilator/"/>
+    
+    <category term="Verilog" scheme="https://devil-sx.github.io/tags/Verilog/"/>
     
   </entry>
   
@@ -212,10 +254,10 @@
   
   <entry>
     <title>Ubuntu安装配置Rime输入法</title>
-    <link href="https://devil-sx.github.io/2022/11/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/Ubuntu%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AERime%E8%BE%93%E5%85%A5%E6%B3%95/"/>
-    <id>https://devil-sx.github.io/2022/11/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/Ubuntu%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AERime%E8%BE%93%E5%85%A5%E6%B3%95/</id>
+    <link href="https://devil-sx.github.io/2022/11/Linux/Ubuntu%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AERime%E8%BE%93%E5%85%A5%E6%B3%95/"/>
+    <id>https://devil-sx.github.io/2022/11/Linux/Ubuntu%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AERime%E8%BE%93%E5%85%A5%E6%B3%95/</id>
     <published>2022-11-03T07:29:06.000Z</published>
-    <updated>2023-02-06T02:02:44.315Z</updated>
+    <updated>2023-02-08T08:36:19.077Z</updated>
     
     
       
