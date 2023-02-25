@@ -1,0 +1,9 @@
+/* Inject in _config.yml */
+
+.hexo-douban-picture img{
+    border-radius: 15%!important;
+}
+
+.hexo-douban-meta{
+    display: none!important;
+}

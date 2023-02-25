@@ -6,7 +6,7 @@
   <link href="https://devil-sx.github.io/atom.xml" rel="self"/>
   
   <link href="https://devil-sx.github.io/"/>
-  <updated>2023-02-24T08:37:24.302Z</updated>
+  <updated>2023-02-25T16:23:19.232Z</updated>
   <id>https://devil-sx.github.io/</id>
   
   <author>
@@ -15,6 +15,44 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>新的风暴|AI对信息检索的变革</title>
+    <link href="https://devil-sx.github.io/2023/02/dc1c51db0967.html"/>
+    <id>https://devil-sx.github.io/2023/02/dc1c51db0967.html</id>
+    <published>2023-02-25T15:20:45.000Z</published>
+    <updated>2023-02-25T16:23:19.232Z</updated>
+    
+    
+    <summary type="html">大的要来喽！</summary>
+    
+    
+    
+    <category term="随记感想" scheme="https://devil-sx.github.io/categories/%E9%9A%8F%E8%AE%B0%E6%84%9F%E6%83%B3/"/>
+    
+    
+    <category term="杂谈" scheme="https://devil-sx.github.io/tags/%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>情人节|拥抱单身</title>
+    <link href="https://devil-sx.github.io/2023/02/4c0e4c1a0b26.html"/>
+    <id>https://devil-sx.github.io/2023/02/4c0e4c1a0b26.html</id>
+    <published>2023-02-23T07:31:53.000Z</published>
+    <updated>2023-02-25T15:18:51.183Z</updated>
+    
+    
+    <summary type="html">你若要享受这份自由，便要学会承受这份孤独。</summary>
+    
+    
+    
+    <category term="随记感想" scheme="https://devil-sx.github.io/categories/%E9%9A%8F%E8%AE%B0%E6%84%9F%E6%83%B3/"/>
+    
+    
+    <category term="杂谈" scheme="https://devil-sx.github.io/tags/%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
   
   <entry>
     <title>RS锁存器叫法小争议</title>
@@ -32,25 +70,6 @@
     
     
     <category term="数字电路" scheme="https://devil-sx.github.io/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>情人节|拥抱单身</title>
-    <link href="https://devil-sx.github.io/2023/02/08aa900ab9b3.html"/>
-    <id>https://devil-sx.github.io/2023/02/08aa900ab9b3.html</id>
-    <published>2023-02-15T08:21:26.000Z</published>
-    <updated>2023-02-23T07:31:53.620Z</updated>
-    
-    
-    <summary type="html">你若要享受这份自由，便要学会承受这份孤独。</summary>
-    
-    
-    
-    <category term="随记感想" scheme="https://devil-sx.github.io/categories/%E9%9A%8F%E8%AE%B0%E6%84%9F%E6%83%B3/"/>
-    
-    
-    <category term="杂谈" scheme="https://devil-sx.github.io/tags/%E6%9D%82%E8%B0%88/"/>
     
   </entry>
   
@@ -319,9 +338,9 @@
     <category term="基础理论" scheme="https://devil-sx.github.io/categories/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/"/>
     
     
-    <category term="信号与系统" scheme="https://devil-sx.github.io/tags/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/"/>
-    
     <category term="傅里叶变换" scheme="https://devil-sx.github.io/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/"/>
+    
+    <category term="信号与系统" scheme="https://devil-sx.github.io/tags/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
@@ -340,9 +359,9 @@
     <category term="基础理论" scheme="https://devil-sx.github.io/categories/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/"/>
     
     
-    <category term="数字信号处理" scheme="https://devil-sx.github.io/tags/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/"/>
-    
     <category term="信号与系统" scheme="https://devil-sx.github.io/tags/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/"/>
+    
+    <category term="数字信号处理" scheme="https://devil-sx.github.io/tags/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/"/>
     
   </entry>
   
