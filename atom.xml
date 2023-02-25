@@ -6,7 +6,7 @@
   <link href="https://devil-sx.github.io/atom.xml" rel="self"/>
   
   <link href="https://devil-sx.github.io/"/>
-  <updated>2023-02-25T16:23:19.232Z</updated>
+  <updated>2023-02-25T17:10:12.325Z</updated>
   <id>https://devil-sx.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://devil-sx.github.io/2023/02/dc1c51db0967.html"/>
     <id>https://devil-sx.github.io/2023/02/dc1c51db0967.html</id>
     <published>2023-02-25T15:20:45.000Z</published>
-    <updated>2023-02-25T16:23:19.232Z</updated>
+    <updated>2023-02-25T17:10:12.325Z</updated>
     
     
     <summary type="html">大的要来喽！</summary>
@@ -33,24 +33,7 @@
     
     <category term="杂谈" scheme="https://devil-sx.github.io/tags/%E6%9D%82%E8%B0%88/"/>
     
-  </entry>
-  
-  <entry>
-    <title>情人节|拥抱单身</title>
-    <link href="https://devil-sx.github.io/2023/02/4c0e4c1a0b26.html"/>
-    <id>https://devil-sx.github.io/2023/02/4c0e4c1a0b26.html</id>
-    <published>2023-02-23T07:31:53.000Z</published>
-    <updated>2023-02-25T15:18:51.183Z</updated>
-    
-    
-    <summary type="html">你若要享受这份自由，便要学会承受这份孤独。</summary>
-    
-    
-    
-    <category term="随记感想" scheme="https://devil-sx.github.io/categories/%E9%9A%8F%E8%AE%B0%E6%84%9F%E6%83%B3/"/>
-    
-    
-    <category term="杂谈" scheme="https://devil-sx.github.io/tags/%E6%9D%82%E8%B0%88/"/>
+    <category term="AI" scheme="https://devil-sx.github.io/tags/AI/"/>
     
   </entry>
   
@@ -70,6 +53,25 @@
     
     
     <category term="数字电路" scheme="https://devil-sx.github.io/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>情人节|拥抱单身</title>
+    <link href="https://devil-sx.github.io/2023/02/e1e460a8c606.html"/>
+    <id>https://devil-sx.github.io/2023/02/e1e460a8c606.html</id>
+    <published>2023-02-15T07:31:53.000Z</published>
+    <updated>2023-02-25T16:30:37.487Z</updated>
+    
+    
+    <summary type="html">你若要享受这份自由，便要学会承受这份孤独。</summary>
+    
+    
+    
+    <category term="随记感想" scheme="https://devil-sx.github.io/categories/%E9%9A%8F%E8%AE%B0%E6%84%9F%E6%83%B3/"/>
+    
+    
+    <category term="杂谈" scheme="https://devil-sx.github.io/tags/%E6%9D%82%E8%B0%88/"/>
     
   </entry>
   

@@ -1,7 +1,13 @@
 /* Inject in _config.yml */
 
+.hexo-douban-item{
+    width: 50%!important;
+}
+
+
 .hexo-douban-picture img{
     border-radius: 15%!important;
+    width: 200px!important;
 }
 
 .hexo-douban-meta{
