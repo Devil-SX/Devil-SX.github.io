@@ -6,7 +6,7 @@
   <link href="https://devil-sx.github.io/atom.xml" rel="self"/>
   
   <link href="https://devil-sx.github.io/"/>
-  <updated>2023-02-26T12:02:04.339Z</updated>
+  <updated>2023-02-27T05:17:09.323Z</updated>
   <id>https://devil-sx.github.io/</id>
   
   <author>
@@ -17,11 +17,30 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>对于闭环传递函数的理解</title>
+    <link href="https://devil-sx.github.io/2023/02/c0cdf4d15cd3.html"/>
+    <id>https://devil-sx.github.io/2023/02/c0cdf4d15cd3.html</id>
+    <published>2023-02-27T05:01:33.000Z</published>
+    <updated>2023-02-27T05:17:09.323Z</updated>
+    
+    
+    <summary type="html">分式形式看着总感觉不够优雅</summary>
+    
+    
+    
+    <category term="基础理论" scheme="https://devil-sx.github.io/categories/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/"/>
+    
+    
+    <category term="控制论" scheme="https://devil-sx.github.io/tags/%E6%8E%A7%E5%88%B6%E8%AE%BA/"/>
+    
+  </entry>
+  
+  <entry>
     <title>亚稳态和跨时钟域</title>
     <link href="https://devil-sx.github.io/2023/02/6d3fe769c022.html"/>
     <id>https://devil-sx.github.io/2023/02/6d3fe769c022.html</id>
     <published>2023-02-26T08:39:56.000Z</published>
-    <updated>2023-02-26T12:02:04.339Z</updated>
+    <updated>2023-02-26T12:02:41.924Z</updated>
     
     
       
@@ -33,6 +52,8 @@
       
     
     
+    
+    <category term="基础理论" scheme="https://devil-sx.github.io/categories/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/"/>
     
     
     <category term="数字电路" scheme="https://devil-sx.github.io/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF/"/>
@@ -187,7 +208,7 @@
     <link href="https://devil-sx.github.io/2022/12/69f77ae821f4.html"/>
     <id>https://devil-sx.github.io/2022/12/69f77ae821f4.html</id>
     <published>2022-12-20T13:06:35.000Z</published>
-    <updated>2023-02-09T15:40:19.415Z</updated>
+    <updated>2023-02-26T12:03:42.548Z</updated>
     
     
     <summary type="html">对称之美，简洁之美。</summary>
@@ -363,9 +384,9 @@
     <category term="基础理论" scheme="https://devil-sx.github.io/categories/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/"/>
     
     
-    <category term="傅里叶变换" scheme="https://devil-sx.github.io/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/"/>
-    
     <category term="信号与系统" scheme="https://devil-sx.github.io/tags/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/"/>
+    
+    <category term="傅里叶变换" scheme="https://devil-sx.github.io/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/"/>
     
   </entry>
   
@@ -384,9 +405,9 @@
     <category term="基础理论" scheme="https://devil-sx.github.io/categories/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/"/>
     
     
-    <category term="信号与系统" scheme="https://devil-sx.github.io/tags/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/"/>
-    
     <category term="数字信号处理" scheme="https://devil-sx.github.io/tags/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/"/>
+    
+    <category term="信号与系统" scheme="https://devil-sx.github.io/tags/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
@@ -408,27 +429,6 @@
     <category term="信号与系统" scheme="https://devil-sx.github.io/tags/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/"/>
     
     <category term="滤波器" scheme="https://devil-sx.github.io/tags/%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《信号与系统》勘误</title>
-    <link href="https://devil-sx.github.io/2022/10/3101a8838a09.html"/>
-    <id>https://devil-sx.github.io/2022/10/3101a8838a09.html</id>
-    <published>2022-10-18T12:41:42.000Z</published>
-    <updated>2023-02-24T08:37:24.298Z</updated>
-    
-    
-    <summary type="html">对北京理工大学出版社《信号与系统》教材的勘误</summary>
-    
-    
-    
-    <category term="基础理论" scheme="https://devil-sx.github.io/categories/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/"/>
-    
-    
-    <category term="信号与系统" scheme="https://devil-sx.github.io/tags/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/"/>
-    
-    <category term="书籍勘误" scheme="https://devil-sx.github.io/tags/%E4%B9%A6%E7%B1%8D%E5%8B%98%E8%AF%AF/"/>
     
   </entry>
   

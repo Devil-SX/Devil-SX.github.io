@@ -1,6 +1,6 @@
 /* Inject in _config.yml */
 
-#recent-posts>.recent-post-item{
+#recent-posts > .recent-post-item{
     height: 12em!important;
 }
 
