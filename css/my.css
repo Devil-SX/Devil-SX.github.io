@@ -1,13 +1,38 @@
 /* Inject in _config.yml */
 
+/* Home Page Post */
 #recent-posts > .recent-post-item{
-    height: 12em!important;
+    height: 12em;
 }
 
+@media screen and (max-width: 768px) {
+  #recent-posts > .recent-post-item >.recent-post-info > .article-title {
+    font-size: 1.72em;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #recent-posts > .recent-post-item >.recent-post-info.no-cover {
+    padding: 10px 20px;
+  }
+}
+
+#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap {
+  /* margin: 6px 0; */
+  color: #a6a6a6;
+  font-size: 70%;
+}
+
+#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .post-meta-date {
+  color: #37843c;
+}
+
+
+/* Nav */
 #nav-right{
-	flex: 1 1 auto!important;
-    flex-wrap: nowrap!important;
-    display: flex!important;
-    justify-content: flex-end!important;
+  flex: 1 1 auto;
+    flex-wrap: nowrap;
+    display: flex;
+    justify-content: flex-end;
 }
 
