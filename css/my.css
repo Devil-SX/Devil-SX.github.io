@@ -1,4 +1,8 @@
 /* Inject in _config.yml */
+:not(svg) {
+  transform-origin: 0px 0px;
+}
+
 /* Home Page Post */
 #recent-posts > .recent-post-item{
     height: 12em;
@@ -69,7 +73,7 @@ a[data-fancybox] > img{
 .parallax > use:nth-child(4) {
   animation-delay: -5s;
   animation-duration: 20s;
-  fill: #f7f9fe;
+  fill: #e4e6ea;
 }
 /* 黑色模式背景 */
 [data-theme="dark"] .parallax > use:nth-child(1) {
@@ -90,7 +94,7 @@ a[data-fancybox] > img{
 [data-theme="dark"] .parallax > use:nth-child(4) {
   animation-delay: -5s;
   animation-duration: 20s;
-  fill: #18171d;
+  fill: #7e7e7e;
 }
 
 @keyframes move-forever {
