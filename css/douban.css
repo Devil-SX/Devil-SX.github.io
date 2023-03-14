@@ -13,7 +13,7 @@
 .hexo-douban-title > a{
     font-size: large;
     font-weight: bold;
-    color: black;
+    color: black!important;
 }
 .hexo-douban-meta{
     display: none!important;

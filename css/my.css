@@ -6,6 +6,8 @@
 @media screen and (max-width: 768px) {
   #recent-posts > .recent-post-item >.recent-post-info > .article-title {
     font-size: 1.72em;
+    font-weight: bold!important;
+    color: #314933!important;
   }
 }
 @media screen and (max-width: 768px) {
@@ -20,6 +22,10 @@
 }
 #recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .post-meta-date {
   color: #37843c;
+}
+/* Post Page */
+#post-info post-title{
+  font-weight: bold!important;
 }
 /* Sidebar */
 /* Nav */
