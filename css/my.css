@@ -1,8 +1,4 @@
 /* Inject in _config.yml */
-:not(svg) {
-  transform-origin: 0px 0px;
-}
-
 /* Home Page Post */
 #recent-posts > .recent-post-item{
     height: 12em;

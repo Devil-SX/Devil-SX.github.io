@@ -1,15 +1,20 @@
 /* Inject in _config.yml */
 
-.hexo-douban-item{
+/* .hexo-douban-item{
     width: 50%!important;
-}
+} */
 
 
 .hexo-douban-picture img{
-    border-radius: 15%!important;
+    border-radius: unset!important;
     width: 200px!important;
+    box-shadow: 5px 5px #414b51;
+} 
+.hexo-douban-title > a{
+    font-size: large;
+    font-weight: bold;
+    color: black;
 }
-
 .hexo-douban-meta{
     display: none!important;
 }
