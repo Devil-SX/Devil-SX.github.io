@@ -3,11 +3,16 @@
 #recent-posts > .recent-post-item{
     height: 12em;
 }
+#recent-posts > .recent-post-item >.recent-post-info > .article-title{
+  font-size: 1.72em;
+  font-weight: bold;
+  color: #314933;
+}
 @media screen and (max-width: 768px) {
   #recent-posts > .recent-post-item >.recent-post-info > .article-title {
-    font-size: 1.72em;
-    font-weight: bold!important;
-    color: #314933!important;
+    font-size: 1.40em;
+    font-weight: bold;
+    color: #314933;
   }
 }
 @media screen and (max-width: 768px) {
@@ -28,6 +33,17 @@
   font-weight: bold!important;
 }
 /* Sidebar */
+/* .avatar-img{
+  width: unset!important;
+  height: unset!important;
+  border-radius: 1em!important;
+} */
+.author-card{
+  background: no-repeat center top!important;
+  background-size: 100%,100%!important;
+  background-image: linear-gradient(to top, rgba(255,255,255,1),rgba(255,255,255,0),rgba(255,255,255,0)),url(https://cdn.jsdelivr.net/gh/Devil-SX/blog-tube@main/avatar.jpg)!important;
+  padding-top: 200px!important;
+}
 /* Nav */
 #nav-right{
   flex: 1 1 auto;
