@@ -40,9 +40,9 @@
 } */
 .author-card{
   background: no-repeat center top!important;
-  background-size: 100%,100%!important;
-  background-image: linear-gradient(to top, rgba(255,255,255,1),rgba(255,255,255,0),rgba(255,255,255,0)),url(https://cdn.jsdelivr.net/gh/Devil-SX/blog-tube@main/avatar.jpg)!important;
-  padding-top: 200px!important;
+  background-size: auto,auto 70%!important;
+  background-image: linear-gradient(to top, rgba(255,255,255,1),rgba(255,255,255,1),60%,rgba(255,255,255,0),rgba(255,255,255,0)),url(https://cdn.jsdelivr.net/gh/Devil-SX/blog-tube@main/avatar.jpg)!important;
+  padding-top: 250px!important;
 }
 /* Nav */
 #nav-right{
