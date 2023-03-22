@@ -1,0 +1,25 @@
+/* Post */
+a[data-fancybox] > img{
+  border-radius: 1em;
+}
+
+/* 波浪css */
+.main-hero-waves-area {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: -11px;
+  z-index: 5;
+}
+.waves-area .waves-svg {
+  width: 100%;
+  height: 5rem;
+}
+
+/* 首字母下沉 */
+p:first-of-type::first-letter{
+  font-size: 4em;
+  float: left;
+  line-height: 1;
+  margin-right: 0.25rem;
+}
