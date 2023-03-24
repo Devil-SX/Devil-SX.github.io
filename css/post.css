@@ -17,7 +17,7 @@ a[data-fancybox] > img{
 }
 
 /* 首字母下沉 */
-p:first-of-type::first-letter{
+#article-container.post-content  p:first-of-type::first-letter{
   font-size: 4em;
   float: left;
   line-height: 1;
