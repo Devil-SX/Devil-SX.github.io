@@ -6,7 +6,7 @@
   <link href="https://devil-sx.github.io/atom.xml" rel="self"/>
   
   <link href="https://devil-sx.github.io/"/>
-  <updated>2023-03-07T05:49:11.027Z</updated>
+  <updated>2023-03-30T09:30:32.670Z</updated>
   <id>https://devil-sx.github.io/</id>
   
   <author>
@@ -17,18 +17,39 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>反直觉的反馈系统</title>
+    <link href="https://devil-sx.github.io/2023/03/27bf503a14d2.html"/>
+    <id>https://devil-sx.github.io/2023/03/27bf503a14d2.html</id>
+    <published>2023-03-30T08:40:01.000Z</published>
+    <updated>2023-03-30T09:30:32.670Z</updated>
+    
+    
+    <summary type="html">为系统人为赋予意义</summary>
+    
+    
+    
+    <category term="基础理论" scheme="https://devil-sx.github.io/categories/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/"/>
+    
+    
+    <category term="信号与系统" scheme="https://devil-sx.github.io/tags/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/"/>
+    
+    <category term="控制论" scheme="https://devil-sx.github.io/tags/%E6%8E%A7%E5%88%B6%E8%AE%BA/"/>
+    
+  </entry>
+  
+  <entry>
     <title>梅森公式小技巧</title>
-    <link href="https://devil-sx.github.io/2023/03/6ea868f1aa6b.html"/>
-    <id>https://devil-sx.github.io/2023/03/6ea868f1aa6b.html</id>
+    <link href="https://devil-sx.github.io/2023/03/6ed84416f56c.html"/>
+    <id>https://devil-sx.github.io/2023/03/6ed84416f56c.html</id>
     <published>2023-03-06T06:27:00.000Z</published>
-    <updated>2023-03-07T05:49:11.027Z</updated>
+    <updated>2023-03-30T09:30:32.670Z</updated>
     
     
     <summary type="html">来点颜色</summary>
     
     
     
-    <category term="经验分享" scheme="https://devil-sx.github.io/categories/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/"/>
+    <category term="经验感悟" scheme="https://devil-sx.github.io/categories/%E7%BB%8F%E9%AA%8C%E6%84%9F%E6%82%9F/"/>
     
     
     <category term="控制论" scheme="https://devil-sx.github.io/tags/%E6%8E%A7%E5%88%B6%E8%AE%BA/"/>
@@ -37,17 +58,17 @@
   
   <entry>
     <title>将C转换为8086汇编代码</title>
-    <link href="https://devil-sx.github.io/2023/03/493cb2038d8c.html"/>
-    <id>https://devil-sx.github.io/2023/03/493cb2038d8c.html</id>
+    <link href="https://devil-sx.github.io/2023/03/2af6b19e0eaa.html"/>
+    <id>https://devil-sx.github.io/2023/03/2af6b19e0eaa.html</id>
     <published>2023-03-01T01:44:51.000Z</published>
-    <updated>2023-03-23T03:29:58.633Z</updated>
+    <updated>2023-03-30T09:30:32.670Z</updated>
     
     
     <summary type="html">复古朋克</summary>
     
     
     
-    <category term="经验分享" scheme="https://devil-sx.github.io/categories/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/"/>
+    <category term="经验感悟" scheme="https://devil-sx.github.io/categories/%E7%BB%8F%E9%AA%8C%E6%84%9F%E6%82%9F/"/>
     
     
     <category term="gcc" scheme="https://devil-sx.github.io/tags/gcc/"/>
@@ -123,17 +144,17 @@
   
   <entry>
     <title>RS锁存器叫法小争议</title>
-    <link href="https://devil-sx.github.io/2023/02/6a4460d080b0.html"/>
-    <id>https://devil-sx.github.io/2023/02/6a4460d080b0.html</id>
+    <link href="https://devil-sx.github.io/2023/02/670d4a29a9b5.html"/>
+    <id>https://devil-sx.github.io/2023/02/670d4a29a9b5.html</id>
     <published>2023-02-19T15:33:53.000Z</published>
-    <updated>2023-02-26T03:09:47.820Z</updated>
+    <updated>2023-03-30T09:30:32.670Z</updated>
     
     
     <summary type="html">没有标准协会的后果</summary>
     
     
     
-    <category term="经验分享" scheme="https://devil-sx.github.io/categories/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/"/>
+    <category term="经验感悟" scheme="https://devil-sx.github.io/categories/%E7%BB%8F%E9%AA%8C%E6%84%9F%E6%82%9F/"/>
     
     
     <category term="数字电路" scheme="https://devil-sx.github.io/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF/"/>
@@ -205,17 +226,17 @@
   
   <entry>
     <title>volatile和变量模型</title>
-    <link href="https://devil-sx.github.io/2023/01/258c1ea5bc1c.html"/>
-    <id>https://devil-sx.github.io/2023/01/258c1ea5bc1c.html</id>
+    <link href="https://devil-sx.github.io/2023/01/f8f6d68cf2d4.html"/>
+    <id>https://devil-sx.github.io/2023/01/f8f6d68cf2d4.html</id>
     <published>2023-01-05T16:39:01.000Z</published>
-    <updated>2023-02-24T08:37:24.300Z</updated>
+    <updated>2023-03-30T09:30:32.670Z</updated>
     
     
     <summary type="html">想要让处理器对变量的值进行操作，还需要经过一道门槛</summary>
     
     
     
-    <category term="经验分享" scheme="https://devil-sx.github.io/categories/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/"/>
+    <category term="经验感悟" scheme="https://devil-sx.github.io/categories/%E7%BB%8F%E9%AA%8C%E6%84%9F%E6%82%9F/"/>
     
     
     <category term="计算机结构" scheme="https://devil-sx.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%93%E6%9E%84/"/>
@@ -226,17 +247,17 @@
   
   <entry>
     <title>常见信号频谱记忆小妙招</title>
-    <link href="https://devil-sx.github.io/2022/12/883faa742082.html"/>
-    <id>https://devil-sx.github.io/2022/12/883faa742082.html</id>
+    <link href="https://devil-sx.github.io/2022/12/000242e45c4c.html"/>
+    <id>https://devil-sx.github.io/2022/12/000242e45c4c.html</id>
     <published>2022-12-24T05:24:51.000Z</published>
-    <updated>2023-03-13T03:52:36.989Z</updated>
+    <updated>2023-03-30T09:30:32.670Z</updated>
     
     
     <summary type="html">数学能够用图像表达就简单了一半</summary>
     
     
     
-    <category term="经验分享" scheme="https://devil-sx.github.io/categories/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/"/>
+    <category term="经验感悟" scheme="https://devil-sx.github.io/categories/%E7%BB%8F%E9%AA%8C%E6%84%9F%E6%82%9F/"/>
     
     
     <category term="傅里叶变换" scheme="https://devil-sx.github.io/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/"/>
@@ -329,17 +350,17 @@
   
   <entry>
     <title>Verilator笔记</title>
-    <link href="https://devil-sx.github.io/2022/11/89960d11120c.html"/>
-    <id>https://devil-sx.github.io/2022/11/89960d11120c.html</id>
+    <link href="https://devil-sx.github.io/2022/11/c808f50bc831.html"/>
+    <id>https://devil-sx.github.io/2022/11/c808f50bc831.html</id>
     <published>2022-11-23T11:03:53.000Z</published>
-    <updated>2023-02-09T15:36:17.633Z</updated>
+    <updated>2023-03-30T09:30:32.670Z</updated>
     
     
     <summary type="html">Verilator仿真学习笔记</summary>
     
     
     
-    <category term="经验分享" scheme="https://devil-sx.github.io/categories/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/"/>
+    <category term="经验感悟" scheme="https://devil-sx.github.io/categories/%E7%BB%8F%E9%AA%8C%E6%84%9F%E6%82%9F/"/>
     
     
     <category term="Verilator" scheme="https://devil-sx.github.io/tags/Verilator/"/>
@@ -369,17 +390,17 @@
   
   <entry>
     <title>电容</title>
-    <link href="https://devil-sx.github.io/2022/11/921dda9d70fb.html"/>
-    <id>https://devil-sx.github.io/2022/11/921dda9d70fb.html</id>
+    <link href="https://devil-sx.github.io/2022/11/2e349566ba7c.html"/>
+    <id>https://devil-sx.github.io/2022/11/2e349566ba7c.html</id>
     <published>2022-11-06T01:40:45.000Z</published>
-    <updated>2023-02-24T08:37:24.298Z</updated>
+    <updated>2023-03-30T09:30:32.670Z</updated>
     
     
     <summary type="html">做电路绕不开电阻电容这对好兄弟</summary>
     
     
     
-    <category term="经验分享" scheme="https://devil-sx.github.io/categories/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/"/>
+    <category term="经验感悟" scheme="https://devil-sx.github.io/categories/%E7%BB%8F%E9%AA%8C%E6%84%9F%E6%82%9F/"/>
     
     
     <category term="模拟电路" scheme="https://devil-sx.github.io/tags/%E6%A8%A1%E6%8B%9F%E7%94%B5%E8%B7%AF/"/>
@@ -406,27 +427,6 @@
     <category term="信号与系统" scheme="https://devil-sx.github.io/tags/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/"/>
     
     <category term="滤波器" scheme="https://devil-sx.github.io/tags/%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>为什么说DFT不是真正的傅里叶变换</title>
-    <link href="https://devil-sx.github.io/2022/10/267e02710f83.html"/>
-    <id>https://devil-sx.github.io/2022/10/267e02710f83.html</id>
-    <published>2022-10-31T01:46:08.000Z</published>
-    <updated>2023-02-09T15:39:56.009Z</updated>
-    
-    
-    <summary type="html">老师喃喃“DFT不是FT”是什么意思</summary>
-    
-    
-    
-    <category term="基础理论" scheme="https://devil-sx.github.io/categories/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/"/>
-    
-    
-    <category term="信号与系统" scheme="https://devil-sx.github.io/tags/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/"/>
-    
-    <category term="傅里叶变换" scheme="https://devil-sx.github.io/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/"/>
     
   </entry>
   
