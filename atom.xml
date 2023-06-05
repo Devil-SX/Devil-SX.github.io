@@ -6,7 +6,7 @@
   <link href="https://devil-sx.github.io/atom.xml" rel="self"/>
   
   <link href="https://devil-sx.github.io/"/>
-  <updated>2023-06-02T08:20:53.648Z</updated>
+  <updated>2023-06-05T02:52:08.075Z</updated>
   <id>https://devil-sx.github.io/</id>
   
   <author>
@@ -17,20 +17,33 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>经典回顾——图灵机</title>
+    <link href="https://devil-sx.github.io/2023/06/e21c313b58a1.html"/>
+    <id>https://devil-sx.github.io/2023/06/e21c313b58a1.html</id>
+    <published>2023-06-05T02:25:00.000Z</published>
+    <updated>2023-06-05T02:52:08.075Z</updated>
+    
+    
+    <summary type="html">以此纪念人工智能之父图灵先生</summary>
+    
+    
+    
+    <category term="基础理论" scheme="https://devil-sx.github.io/categories/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/"/>
+    
+    
+    <category term="计算机组成" scheme="https://devil-sx.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/"/>
+    
+  </entry>
+  
+  <entry>
     <title>有关门限判决信号恢复的讨论</title>
     <link href="https://devil-sx.github.io/2023/06/f2c39a34a0eb.html"/>
     <id>https://devil-sx.github.io/2023/06/f2c39a34a0eb.html</id>
     <published>2023-06-02T07:00:00.000Z</published>
-    <updated>2023-06-02T08:20:53.648Z</updated>
+    <updated>2023-06-05T02:22:29.812Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot;</summary>
-        
-      
+    <summary type="html">产生一些学术垃圾</summary>
     
     
     
@@ -122,7 +135,7 @@
     <link href="https://devil-sx.github.io/2023/03/2af6b19e0eaa.html"/>
     <id>https://devil-sx.github.io/2023/03/2af6b19e0eaa.html</id>
     <published>2023-03-01T01:44:51.000Z</published>
-    <updated>2023-03-30T09:30:32.670Z</updated>
+    <updated>2023-06-05T02:26:24.474Z</updated>
     
     
     <summary type="html">复古朋克</summary>
@@ -135,6 +148,8 @@
     <category term="gcc" scheme="https://devil-sx.github.io/tags/gcc/"/>
     
     <category term="编译" scheme="https://devil-sx.github.io/tags/%E7%BC%96%E8%AF%91/"/>
+    
+    <category term="汇编" scheme="https://devil-sx.github.io/tags/%E6%B1%87%E7%BC%96/"/>
     
   </entry>
   
@@ -406,27 +421,6 @@
     <category term="书籍勘误" scheme="https://devil-sx.github.io/tags/%E4%B9%A6%E7%B1%8D%E5%8B%98%E8%AF%AF/"/>
     
     <category term="通信" scheme="https://devil-sx.github.io/tags/%E9%80%9A%E4%BF%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Verilator笔记</title>
-    <link href="https://devil-sx.github.io/2022/11/c808f50bc831.html"/>
-    <id>https://devil-sx.github.io/2022/11/c808f50bc831.html</id>
-    <published>2022-11-23T11:03:53.000Z</published>
-    <updated>2023-03-30T09:30:32.670Z</updated>
-    
-    
-    <summary type="html">Verilator仿真学习笔记</summary>
-    
-    
-    
-    <category term="经验感悟" scheme="https://devil-sx.github.io/categories/%E7%BB%8F%E9%AA%8C%E6%84%9F%E6%82%9F/"/>
-    
-    
-    <category term="Verilator" scheme="https://devil-sx.github.io/tags/Verilator/"/>
-    
-    <category term="Verilog" scheme="https://devil-sx.github.io/tags/Verilog/"/>
     
   </entry>
   
