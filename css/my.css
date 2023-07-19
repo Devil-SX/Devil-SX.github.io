@@ -36,6 +36,11 @@
   background-image: linear-gradient(to top, rgba(255,255,255,1),rgba(255,255,255,1),60%,rgba(255,255,255,0),rgba(255,255,255,0)),url(https://cdn.jsdelivr.net/gh/Devil-SX/blog-tube@main/avatar.jpg)!important;
   padding-top: 250px!important;
 }
+
+.card-announcement{
+  font-weight: bold;
+}
+
 /* TOC */
 #aside-content #card-toc .toc-content .toc-link.active {
   font-size: large;
